@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "欢迎您于 ${date} 使用快速上传源码脚本"
+echo "欢迎您于 `${date}` 使用快速上传源码脚本"
 
 git add .
 
