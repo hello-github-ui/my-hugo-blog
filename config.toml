@@ -48,11 +48,8 @@ uglyURLs = false
 [permalinks]
     categories = "/categories/:slug/"
     tags = "/tags/:slug/"
+	posts = ":slug"
 
-# 增加 uglyurls 配置
-uglyurls = true
-[permalinks]
-  posts = ":slug"
 
 # 类别
 [taxonomies]
