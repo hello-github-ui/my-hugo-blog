@@ -31,13 +31,13 @@ enableEmoji = false
 footnoteReturnLinkContents = "↩"
 
 # 是否启用 Git 版本信息
-enableGitInfo = false
+enableGitInfo = true
 
 # 是否生成 robots.txt 文件
 enableRobotsTXT = true
 
 # 每一分页的文章数（仅对「文章摘要」首页布局有效）
-paginate = 5
+paginate = 8
 
 # URL 相关
 disablePathToLower = false
@@ -601,10 +601,10 @@ uglyURLs = false
     disqusShortname = ""
 
     ## Valine
-    enableValine = false
-    valineAppId = ""
-    valineAppKey = ""
-    valinePlaceholder = "Just go go"
+    enableValine = true
+    valineAppId = "o5mQhkXEpzF2DPbMdHaUXRiO-gzGzoHsz"
+    valineAppKey = "Aus9thPVR087m81FvJMkNmea"
+    valinePlaceholder = "别矜持了，快来说出你的骚话吧！"
     valinePath = ""
     valineAvatar = "mm"
     valineMeta = ["nick", "mail", "link"]
