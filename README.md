@@ -20,5 +20,5 @@ $ hugo new site project-name
 
 ## demo
 
-![](https://img.imgdb.cn/item/6044e5d8cef1ec5e6fe6f2c4.jpg)
+![demo](https://img.imgdb.cn/item/6044e5d8cef1ec5e6fe6f2c4.jpg)
 
