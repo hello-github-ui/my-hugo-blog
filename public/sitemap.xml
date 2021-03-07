@@ -2,23 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://example.com/archives/</loc>
+    <loc>https://my-hugo-blog-latin-xiao-mao.vercel.app/archives/</loc>
     <lastmod>2021-03-07T22:23:42+08:00</lastmod>
   </url><url>
-    <loc>https://example.com/about/</loc>
+    <loc>https://my-hugo-blog-latin-xiao-mao.vercel.app/about/</loc>
     <lastmod>2021-03-07T22:23:16+08:00</lastmod>
   </url><url>
-    <loc>https://example.com/</loc>
+    <loc>https://my-hugo-blog-latin-xiao-mao.vercel.app/my-first-post/</loc>
     <lastmod>2021-03-07T22:23:55+08:00</lastmod>
   </url><url>
-    <loc>https://example.com/my-first-post/</loc>
+    <loc>https://my-hugo-blog-latin-xiao-mao.vercel.app/</loc>
     <lastmod>2021-03-07T22:23:55+08:00</lastmod>
   </url><url>
-    <loc>https://example.com/posts/</loc>
+    <loc>https://my-hugo-blog-latin-xiao-mao.vercel.app/posts/</loc>
     <lastmod>2021-03-07T22:23:55+08:00</lastmod>
   </url><url>
-    <loc>https://example.com/categories/</loc>
+    <loc>https://my-hugo-blog-latin-xiao-mao.vercel.app/categories/</loc>
   </url><url>
-    <loc>https://example.com/tags/</loc>
+    <loc>https://my-hugo-blog-latin-xiao-mao.vercel.app/tags/</loc>
   </url>
 </urlset>

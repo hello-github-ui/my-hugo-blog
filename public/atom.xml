@@ -2,15 +2,15 @@
 
 
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN">
-    <title type="text">Hugo Blog</title>
+    <title type="text">My Hugo Blog</title>
     <subtitle type="html">MemE 是一个强大且可高度定制的 GoHugo 博客主题，专为个人博客设计。</subtitle>
-    <updated>2021-03-07T22:26:24&#43;08:00</updated>
-    <id>https://example.com/</id>
-    <link rel="alternate" type="text/html" href="https://example.com/" />
-    <link rel="self" type="application/atom&#43;xml" href="https://example.com/atom.xml" />
+    <updated>2021-03-07T22:36:24&#43;08:00</updated>
+    <id>https://my-hugo-blog-latin-xiao-mao.vercel.app/</id>
+    <link rel="alternate" type="text/html" href="https://my-hugo-blog-latin-xiao-mao.vercel.app/" />
+    <link rel="self" type="application/atom&#43;xml" href="https://my-hugo-blog-latin-xiao-mao.vercel.app/atom.xml" />
     <author>
             <name>古月轩039</name>
-            <uri>https://example.com/</uri>
+            <uri>https://my-hugo-blog-latin-xiao-mao.vercel.app/</uri>
             
                 <email>reuixiy@gmail.com</email>
             </author>
@@ -18,8 +18,8 @@
     <generator uri="https://gohugo.io/" version="0.81.0">Hugo</generator>
         <entry>
             <title type="text">My First Post</title>
-            <link rel="alternate" type="text/html" href="https://example.com/my-first-post/" />
-            <id>https://example.com/my-first-post/</id>
+            <link rel="alternate" type="text/html" href="https://my-hugo-blog-latin-xiao-mao.vercel.app/my-first-post/" />
+            <id>https://my-hugo-blog-latin-xiao-mao.vercel.app/my-first-post/</id>
             <updated>2021-03-07T22:23:55&#43;08:00</updated>
             <published>2019-07-18T17:18:05&#43;01:00</published>
             <author>

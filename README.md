@@ -1,6 +1,6 @@
-# Hugo Example
+# 说明
 
-This directory is a brief example of a [Hugo](https://gohugo.io/) app that can be deployed with Vercel and zero configuration.
+这是我的博客仓库点。博客采用 `hugo` + `vercel` 搭建而成，博客源码存放于此，每当有新的push操作时，vercel即会自动重新构建，部署到 `https://my-hugo-blog-latin-xiao-mao.vercel.app/` 站点上，欢迎访问。
 
 ## Deploy Your Own
 
@@ -17,3 +17,8 @@ To get started with Hugo for deployment with Vercel, you can use the [Hugo CLI](
 ```shell
 $ hugo new site project-name
 ```
+
+## demo
+
+![](https://img.imgdb.cn/item/6044e5d8cef1ec5e6fe6f2c4.jpg)
+

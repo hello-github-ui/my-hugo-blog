@@ -1,8 +1,8 @@
 ##########################################
 # 站点配置
 
-baseURL = "https://example.com/"
-title = "Hugo Blog"
+baseURL = "https://my-hugo-blog-latin-xiao-mao.vercel.app/"
+title = "My Hugo Blog"
 languageCode = "zh-CN"
 hasCJKLanguage = true
 # 版权信息（支持 Markdown）
