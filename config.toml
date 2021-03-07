@@ -49,6 +49,11 @@ uglyURLs = false
     categories = "/categories/:slug/"
     tags = "/tags/:slug/"
 
+# 增加 uglyurls 配置
+uglyurls = true
+[permalinks]
+  posts = ":slug"
+
 # 类别
 [taxonomies]
     category = "categories"
@@ -184,6 +189,12 @@ uglyURLs = false
     #     weight = 1
     #     pre = "internal"
     #     post = "home"
+	[[menu.main]]
+		url = "/archives/"
+		name = "归档"
+		weight = 2
+		pre = "internal"
+		post = "archive"
     [[menu.main]]
         url = "/posts/"
         name = "文章"
