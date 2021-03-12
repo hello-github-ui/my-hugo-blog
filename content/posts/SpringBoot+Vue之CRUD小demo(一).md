@@ -6,18 +6,6 @@ categories: [编程]
 tags: [SpringBoot,Vue]
 ---
 
-
-title: springboot-vue-demo-01
-cover: https://cdn.jsdelivr.net/gh/latin-xiao-mao/blog-cover-img/33.jpg
-tags:
-  - springboot
-  - vue
-categories:
-  - 编程
-abbrlink: 287fbb64
-date: 2020-06-14 23:39:28
----
-
 # 新建Vue3前端项目
 
 ## 先删除之前的vue2版本

@@ -9,7 +9,7 @@ tags: [SpringBoot,Vue]
 
 # Vue + Element UI
 
-先在[上一期](https://my-hugo-blog-latin-xiao-mao.vercel.app/SpringBoot+Vue之CRUD小demo\(一)/)的文章基础上引入 `element-ui` 依赖
+先在<mark>[上一期](https://my-hugo-blog-latin-xiao-mao.vercel.app/springboot-vue%E4%B9%8Bcrud%E5%B0%8Fdemo%E4%B8%80/)</mark>的文章基础上引入 `element-ui` 依赖
 
 ## 添加 Element-UI依赖
 ## 
