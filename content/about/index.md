@@ -1,19 +1,33 @@
 ---
-title: "About"
+title: "关于我"
 date: 2021-03-07T22:04:36+08:00
 draft: false
+comments: true
 ---
 
-**最喜欢的一首音乐**
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=576 height=86 src="//music.163.com/outchain/player?type=2&id=421091290&auto=1&height=66" muted="muted"></iframe>
+**<center>关于我</center>**
 
-**关于我**
-
-<div style="background-image: url(https://cdn.jsdelivr.net/gh/latin-xiao-mao/img/gallery/50.jpg); font-family: cursive; color: aliceblue; height: 500px;">
-我自认为我是属于90后中年龄偏大的一批人了，但是技术却很菜。我有时候的想法确实跟大部分人不同，说是不同吧，其实是几乎没人那么去想（从这一点也可以看出我很笨啦）；我虽然属于北方人，但是对于南北方的感受并没有多少的差异。
-<font color="red">注意：所有隐藏的文章在sitempa中可以找到哦</font>
+<div align="center">
+<div style="background: url(https://img.imgdb.cn/item/6040ffcb360785be5482ab28.jpg) no-repeat; 
+background-size:200px 200px; 
+ -moz-border-radius:100px;
+ -webkit-border-radius:100px;
+  border-radius:100px;
+  width:200px;
+  height:200px;
+">
+</div>
 </div>
 
-**精彩集锦**
+**<center>最喜欢的一首音乐</center>**
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=576 height=86 src="//music.163.com/outchain/player?type=2&id=421091290&auto=1&height=66" muted="muted"></iframe>
+
+
+**<center>自我解剖</center>**
+
+我自认为我是属于90后中年龄偏大的一批人了，但是技术却很菜。我有时候的想法确实跟大部分人不同，说是不同吧，其实是几乎没人那么去想（从这一点也可以看出我很笨啦）；我虽然属于北方人，但是对于南北方的感受并没有多少的差异。
+
+**<center>公益视频</center>**
 
 <iframe src="//player.bilibili.com/player.html?aid=967916200&bvid=BV1op4y1X7Sa&cid=183750200&page=1" width=576 height=500 scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>

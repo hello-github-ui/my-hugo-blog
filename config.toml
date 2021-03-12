@@ -2,7 +2,7 @@
 # 站点配置
 
 baseURL = "https://my-hugo-blog-latin-xiao-mao.vercel.app/"
-title = "My Hugo Blog"
+title = "blog"
 languageCode = "zh-CN"
 hasCJKLanguage = true
 # 版权信息（支持 Markdown）
@@ -137,15 +137,15 @@ uglyURLs = false
     baseName = "rss"
 
 # lunr.js 的搜索索引
-# [outputFormats.SearchIndex]
-#     mediaType = "application/json"
-#     baseName = "search"
+[outputFormats.SearchIndex]
+     mediaType = "application/json"
+     baseName = "search"
 
 # Hugo 的输出控制
 [outputs]
     page = ["HTML"]
-    # home = ["HTML", "SectionsAtom", "SectionsRSS", "SearchIndex"]
-    home = ["HTML", "SectionsAtom", "SectionsRSS"]
+    home = ["HTML", "SectionsAtom", "SectionsRSS", "SearchIndex"]
+    # home = ["HTML", "SectionsAtom", "SectionsRSS"]
     section = ["HTML"]
     taxonomy = ["HTML"]
     term = ["HTML"]
@@ -606,19 +606,19 @@ uglyURLs = false
     valineAppKey = "7OyMfNRCyvKvNRp1ahTwfxcf"
     valinePlaceholder = "别矜持了，快来说出你的骚话吧！"
     valinePath = ""
-    valineAvatar = "mm"
+    valineAvatar = ""
     valineMeta = ["nick", "mail", "link"]
     valinePageSize = 10
-    valineLang = "zh-cn"
+    valineLang = "zh-CN"
     valineVisitor = false
     valineHighlight = true
     valineAvatarForce = false
     valineRecordIP = true
-    valineServerURLs = "https://my-hugo-blog-latin-xiao-mao.vercel.app/"
-    valineEmojiCDN = ""
-    valineEmojiMaps = {}
+    valineServerURLs = ""
+    valineEmojiCDN = "https://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/"
+    valineEmojiMaps = {"smile"="e3/2018new_weixioa02_org.png","lovely"="09/2018new_keai_org.png"}
     valineEnableQQ = true
-    valineRequiredFields = []
+    valineRequiredFields = ["nick", "mail"]
     # 说明：https://valine.js.org/
 
     ## Utterances
@@ -1313,7 +1313,7 @@ uglyURLs = false
 
     # 说明：需要开启 `SearchIndex` 的输出
 
-    enableLunrSearch = false
+    enableLunrSearch = true
     # 说明：https://lunrjs.com/
 
 
@@ -1321,9 +1321,9 @@ uglyURLs = false
     # 404 页面
 
     # 视频封面
-    fofPoster = ""
+    fofPoster = "https://img.imgdb.cn/item/604b6a5f5aedab222cd9f83b.jpg"
 
     # 视频地址
-    fofVideoWebm = ""
-    fofVideoMp4 = ""
+    fofVideoWebm = "http://sp.jzsc.net/upload/video/2019-11-26/f53fc26d-eb6c-4aca-bd56-dc21ba123d19.mp4"
+    fofVideoMp4 = "http://sp.jzsc.net/upload/video/2019-11-26/f53fc26d-eb6c-4aca-bd56-dc21ba123d19.mp4"
     # 说明：视频地址可留空（""）
