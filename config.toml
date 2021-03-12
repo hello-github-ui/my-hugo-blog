@@ -602,8 +602,8 @@ uglyURLs = false
 
     ## Valine
     enableValine = true
-    valineAppId = "o5mQhkXEpzF2DPbMdHaUXRiO-gzGzoHsz"
-    valineAppKey = "Aus9thPVR087m81FvJMkNmea"
+    valineAppId = "SqlI8xmlWlUUkEGtN3j67uP4-gzGzoHsz"
+    valineAppKey = "7OyMfNRCyvKvNRp1ahTwfxcf"
     valinePlaceholder = "别矜持了，快来说出你的骚话吧！"
     valinePath = ""
     valineAvatar = "mm"
