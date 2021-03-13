@@ -306,24 +306,35 @@ uglyURLs = false
     # 3. posts     文章摘要
     # 4. page      普通页面
 
-    homeLayout = "posts"
+    homeLayout = "poetry"
 
     ## 「诗意人生」
     # 诗句，支持 Markdown
-    homePoetry = []
+    homePoetry = [
+		"<s>少年听雨歌楼上</s>",
+		"红烛昏罗帐",
+		"<mark>壮年听雨客舟中</mark>",
+		"江阔云低",
+		"断雁叫西风",
+		"而今听雨僧庐下",
+		"鬓已星星也",
+		"悲欢离合总无情",
+		"一任阶前",
+		"点滴到天明"
+	]
     # 底部链接的内间距，单位：em
     homeLinksPadding = 1
 
     ## 「视频片段」
-    homePoster = ""
-    homeVideoWebm = ""
-    homeVideoMp4 = ""
+    homePoster = "https://www.bilibili.com/video/BV11U4y1p7rb"
+    homeVideoWebm = "https://www.bilibili.com/video/BV11U4y1p7rb"
+    homeVideoMp4 = "https://www.bilibili.com/video/BV11U4y1p7rb"
     homeLogo = ""
     homeLogoLink = ""
     homeTitle = ""
     homeMotto = ""
-    homeDescription = ""
-    homeKeywords = ""
+    homeDescription = "感动无处不在"
+    homeKeywords = "感动,公益"
     homeLinksDelimiter = ""
 
 
@@ -1321,7 +1332,7 @@ uglyURLs = false
     # 404 页面
 
     # 视频封面
-    fofPoster = "https://img.imgdb.cn/item/604b6a5f5aedab222cd9f83b.jpg"
+    fofPoster = "https://img.imgdb.cn/item/604ba06d5aedab222cf8e082.jpg"
 
     # 视频地址
     fofVideoWebm = "http://sp.jzsc.net/upload/video/2019-11-26/f53fc26d-eb6c-4aca-bd56-dc21ba123d19.mp4"

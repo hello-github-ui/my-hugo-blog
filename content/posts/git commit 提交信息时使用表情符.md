@@ -5,6 +5,7 @@ draft: false
 categories: [编程]
 tags: [笔记, Git]
 ---
+
 ## 发现点
 我们经常可以在github上看到国外大佬的commit信息中有很多可爱的表情，这是怎么做到的呢？
 ok，可以这样使用哦：`git commit -m '提交信息 :emoji:'`，示例：`git commit -m '增加新功能 :sparkles:'`

@@ -6,18 +6,6 @@ categories: [编程]
 tags: [Java,面试]
 ---
 
----
-title: 面试题
-cover: https://cdn.jsdelivr.net/gh/latin-xiao-mao/blog-cover-img/12.jpg
-top: true
-categories:
-  - 随笔
-tags: 技术点
-abbrlink: 3850f3d2
-date: 2020-07-07 16:50:08
-password:
-message:
----
 
 在程序员的1-3年阶段，我们需要不断努力的学习并积累知识点，那么每个阶段都需要具备什么条件呢？请看下面：
 
