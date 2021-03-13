@@ -4,7 +4,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
     <title type="text">blog</title>
     <subtitle type="html">MemE 是一个强大且可高度定制的 GoHugo 博客主题，专为个人博客设计。</subtitle>
-    <updated>2021-03-13T01:19:13&#43;08:00</updated>
+    <updated>2021-03-13T10:57:11&#43;08:00</updated>
     <id>https://my-hugo-blog-latin-xiao-mao.vercel.app/</id>
     <link rel="alternate" type="text/html" href="https://my-hugo-blog-latin-xiao-mao.vercel.app/" />
     <link rel="self" type="application/atom&#43;xml" href="https://my-hugo-blog-latin-xiao-mao.vercel.app/atom.xml" />
@@ -20,7 +20,7 @@
             <title type="text">网图集</title>
             <link rel="alternate" type="text/html" href="https://my-hugo-blog-latin-xiao-mao.vercel.app/%E7%BD%91%E5%9B%BE%E9%9B%86/" />
             <id>https://my-hugo-blog-latin-xiao-mao.vercel.app/%E7%BD%91%E5%9B%BE%E9%9B%86/</id>
-            <updated>2021-03-13T01:18:31&#43;08:00</updated>
+            <updated>2021-03-13T10:56:57&#43;08:00</updated>
             <published>2021-03-13T00:13:05&#43;08:00</published>
             <author>
                     <name>古月轩039</name>
@@ -84,7 +84,7 @@
 	&lt;img src=&#34;https://img.imgdb.cn/item/604ba0885aedab222cf8ec14.jpg&#34; style=&#34;margin:0;clear:none;float:left;width:200px;height:200px;&#34;/&gt;
 	&lt;img src=&#34;https://img.imgdb.cn/item/604ba0885aedab222cf8ec18.jpg&#34; style=&#34;margin:0;clear:none;float:left;width:200px;height:200px;&#34;/&gt;
 	&lt;img src=&#34;https://img.imgdb.cn/item/604ba09f5aedab222cf8f6cc.jpg&#34; style=&#34;margin:0;clear:none;float:left;width:200px;height:200px;&#34;/&gt;
-	&lt;img src=&#34;https://img.imgdb.cn/item/604ba0b05aedab222cf8fcbe.jpg&#34; style=&#34;margin:0;clear:none;float:left;width:200px;height:200px;&#34;/&gt;
+	&lt;img src=&#34;https://cdn.jsdelivr.net/gh/latin-xiao-mao/18x-images/202117.jpg&#34; style=&#34;margin:0;clear:none;float:left;width:200px;height:200px;&#34;/&gt;
 &lt;/div&gt;
 </content>
             
@@ -2459,17 +2459,17 @@ get key
             <title type="text">SpringBoot&#43;Vue之CRUD小demo(二)</title>
             <link rel="alternate" type="text/html" href="https://my-hugo-blog-latin-xiao-mao.vercel.app/springboot-vue%E4%B9%8Bcrud%E5%B0%8Fdemo%E4%BA%8C/" />
             <id>https://my-hugo-blog-latin-xiao-mao.vercel.app/springboot-vue%E4%B9%8Bcrud%E5%B0%8Fdemo%E4%BA%8C/</id>
-            <updated>2021-03-12T23:16:30&#43;08:00</updated>
+            <updated>2021-03-13T01:23:45&#43;08:00</updated>
             <published>2021-03-12T23:01:34&#43;08:00</published>
             <author>
                     <name>古月轩039</name>
                     <uri>https://io-oi.me/</uri>
                     <email>reuixiy@gmail.com</email>
                     </author>
-            <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">Vue + Element UI 先在上一期/)的文章基础上引入 element-ui 依赖 添加 Element-UI依赖 yarn add element-ui 在 main.js 中…</summary>
+            <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">Vue + Element UI 先在上一期的文章基础上引入 element-ui 依赖 添加 Element-UI依赖 yarn add element-ui 在 main.js 中注册…</summary>
             
                 <content type="html">&lt;h1 id=&#34;vue--element-ui&#34;&gt;Vue + Element UI&lt;/h1&gt;
-&lt;p&gt;先在&lt;a href=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app/SpringBoot+Vue%E4%B9%8BCRUD%E5%B0%8Fdemo(%E4%B8%80&#34;&gt;上一期&lt;/a&gt;/)的文章基础上引入 &lt;code&gt;element-ui&lt;/code&gt; 依赖&lt;/p&gt;
+&lt;p&gt;先在&lt;mark&gt;&lt;a href=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app/springboot-vue%E4%B9%8Bcrud%E5%B0%8Fdemo%E4%B8%80/&#34;&gt;上一期&lt;/a&gt;&lt;/mark&gt;的文章基础上引入 &lt;code&gt;element-ui&lt;/code&gt; 依赖&lt;/p&gt;
 &lt;h2 id=&#34;添加-element-ui依赖&#34;&gt;添加 Element-UI依赖&lt;/h2&gt;
 &lt;h2 id=&#34;heading&#34;&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;yarn add element-ui&lt;/code&gt;&lt;/p&gt;
@@ -2921,28 +2921,16 @@ get key
             <title type="text">SpringBoot&#43;Vue之CRUD小demo(一)</title>
             <link rel="alternate" type="text/html" href="https://my-hugo-blog-latin-xiao-mao.vercel.app/springboot-vue%E4%B9%8Bcrud%E5%B0%8Fdemo%E4%B8%80/" />
             <id>https://my-hugo-blog-latin-xiao-mao.vercel.app/springboot-vue%E4%B9%8Bcrud%E5%B0%8Fdemo%E4%B8%80/</id>
-            <updated>2021-03-12T23:11:14&#43;08:00</updated>
+            <updated>2021-03-13T01:21:56&#43;08:00</updated>
             <published>2021-03-12T23:00:06&#43;08:00</published>
             <author>
                     <name>古月轩039</name>
                     <uri>https://io-oi.me/</uri>
                     <email>reuixiy@gmail.com</email>
                     </author>
-            <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">title: springboot-vue-demo-01 cover: https://cdn.jsdelivr.net/gh/latin-xiao-mao/blog-cover-img/33.jpg tags: springboot vue categories: 编程 abbrlink: 287fbb64 date: 2020-06-14 23:39:28 新建Vue3前端项目 先删除之前的vue2版本 npm uninstall -g vue-cli 安…</summary>
+            <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">新建Vue3前端项目 先删除之前的vue2版本 npm uninstall -g vue-cli 安装新的vue cli 包 npm install -g @vue/cli 安装完…</summary>
             
-                <content type="html">&lt;p&gt;title: springboot-vue-demo-01
-cover: &lt;a href=&#34;https://cdn.jsdelivr.net/gh/latin-xiao-mao/blog-cover-img/33.jpg&#34;&gt;https://cdn.jsdelivr.net/gh/latin-xiao-mao/blog-cover-img/33.jpg&lt;/a&gt;
-tags:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;springboot&lt;/li&gt;
-&lt;li&gt;vue
-categories:&lt;/li&gt;
-&lt;li&gt;编程
-abbrlink: 287fbb64
-date: 2020-06-14 23:39:28&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h1 id=&#34;新建vue3前端项目&#34;&gt;新建Vue3前端项目&lt;/h1&gt;
+                <content type="html">&lt;h1 id=&#34;新建vue3前端项目&#34;&gt;新建Vue3前端项目&lt;/h1&gt;
 &lt;h2 id=&#34;先删除之前的vue2版本&#34;&gt;先删除之前的vue2版本&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;npm uninstall -g vue-cli&lt;/code&gt;&lt;/p&gt;
 &lt;h2 id=&#34;安装新的vue-cli-包&#34;&gt;安装新的vue cli 包&lt;/h2&gt;
