@@ -21,8 +21,11 @@ background-size:200px 200px;
 
 **<center>喜欢的音乐</center>**
 
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=576 height=300 src="//music.163.com/outchain/player?type=0&id=6639331876&auto=0&height=300"></iframe>
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=576 height=300 src="//music.163.com/outchain/player?type=0&id=6658183272&auto=0&height=300"></iframe>
+<div style="width:576px; height:300px;display:flex;align-items:center;">
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=250 height=300 src="//music.163.com/outchain/player?type=0&id=6639331876&auto=0&height=300"></iframe>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=250 height=300 src="//music.163.com/outchain/player?type=0&id=6658183272&auto=0&height=300"></iframe>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=250 height=300 src="//music.163.com/outchain/player?type=0&id=577543756&auto=0&height=430"></iframe>
+</div>
 
 **<center>自我解剖</center>**
 
@@ -30,4 +33,6 @@ background-size:200px 200px;
 
 **<center>公益视频</center>**
 
+<div style="width:576px;height:500px;margin:0 auto;">
 <iframe src="//player.bilibili.com/player.html?aid=967916200&bvid=BV1op4y1X7Sa&cid=183750200&page=1" width=576 height=500 scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+</div>

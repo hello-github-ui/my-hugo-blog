@@ -14,7 +14,7 @@ tags: [Java]
 
 1. 如果是非静态代码块和非静态成员变量，不执行
 
-    ![https://img.imgdb.cn/item/602e3e82343ca1fbf9f20684.png](https://img.imgdb.cn/item/602e3e82343ca1fbf9f20684.png)
+![https://img.imgdb.cn/item/602e3e82343ca1fbf9f20684.png](https://img.imgdb.cn/item/602e3e82343ca1fbf9f20684.png)
 
 ![https://img.imgdb.cn/item/602e3e82343ca1fbf9f20686.png](https://img.imgdb.cn/item/602e3e82343ca1fbf9f20686.png)
 
