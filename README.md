@@ -22,7 +22,4 @@ $ hugo new site project-name
 
 ![demo](https://img.imgdb.cn/item/6044e5d8cef1ec5e6fe6f2c4.jpg)
 
-上面图片可能显示不了，下面备用的 s4tu.com 显示如下：
-
-![my-hugo-blog-demo16be3.jpg](https://www.s4tu.com/images/2021/03/07/my-hugo-blog-demo16be3.jpg)
 
