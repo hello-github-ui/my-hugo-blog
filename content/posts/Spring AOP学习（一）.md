@@ -35,7 +35,7 @@ tags: [Spring AOP, Java, AOP]
 * Pointcut：即切点，一个匹配连接点的正则表达式。当一个连接点匹配到切点时，一个关联到这个切点的特定的通知（Advice）会被执行。
 * Weaving：即编织，负责将切面和目标对象链接，以创建通知对象，在Spring AOP中没有这个东西
 
-
+在spring框架中，aop有两种动态代理方式，其一是基于JDK的动态代理，需要代理的类实现某一个接口，其二是基于CGLIB 的方式，该方式不需要类实现接口就能进行代理。
 
 ## 实操
 
@@ -247,4 +247,211 @@ public class WeixinServiceAspect {
 ```
 
 上面的表达式中，第一个宽字符 * 匹配 任何返回类型，第二个宽字符 * 匹配 任何方法名，最后的参数 (..) 表达式匹配 <strong>任意数量任意类型</strong> 的参数，也就是说该切点会匹配类中所有方法的调用。
+
+**within**
+如果要匹配一个类中所有方法的调用，便可以用 within 指示器
+
+```java
+@Pointcut("within(com.example.springaopdemo.UserDao)")
+```
+
+这样便可以匹配该类中所有方法的调用了。同时我们还可以匹配某个包下面的所有类的所有方法调用，如下面的例子：
+
+```java
+@Pointcut("within(com.example.springaopdemo..*)")
+```
+
+**this和target**
+
+如果目标对象实现了任何接口，Spring AOP会创建基于 CGLIB 的动态代理，这时候需要使用 target 指示器
+
+如果目标对象没有实现任何接口，Spring AOP 会创建基于 JDK 的动态代理，这时候需要使用 this 指示器
+
+```java
+@Pointcut("target(com.example.springaopdemo.A)") A实现了某个接口
+@Pointcut("this(com.example.springaopdemo.B)") B没有实现任何一个接口
+```
+
+**args**
+该指示器用来匹配具体的方法参数
+
+```java
+@Pointcut("execution(* *..find*(Long))")
+```
+
+这个切点会匹配任何以 find 开头并且只有一个 Long 类型的参数的方法
+
+如果我们想匹配一个以 Long 类型开始的参数，后面的参数类型不做限制，我们可以使用如下的表达式：
+
+```java
+@Pointcut("execution(* *..find*(Long))")
+```
+
+**@target**
+该指示器不要和 target 指示器混淆，该指示器用于匹配连接点所在的类是否拥有指定类型的注解，如：
+
+```java
+@Pointcut("@target(org.springframework.stereotype.Repository)")
+```
+
+**@annotation**
+该指示器用于匹配连接点的方法是否具有某个注解
+
+```java
+@Pointcut("@annotation(org.springframework.scheduling.annotion.Async)")
+```
+
+**组合切点表达式**
+切点表达式可以通过 && 、|| 和 ！等操作符来组合，如
+
+```java
+@Pointcut("@target(org.springframework.stereotype.Repository)")
+public void repositoryMethods() {}
+ 
+@Pointcut("execution(* *..create*(Long,..))")
+public void firstLongParamMethods() {}
+ 
+@Pointcut("repositoryMethods() && firstLongParamMethods()")
+public void entityCreationMethods() {}
+```
+
+上面的第三个切点需要同时满足第一个和第二个切点表达式
+
+#### Advice定义
+
+Advice通知，即在连接点处要执行的代码，分为以下几种类型
+
+- Around
+- Before
+- After
+
+#### 开启 Advice
+
+如果要在Spring中使用Spring AOP，需要开启 Advice，使用 @EnableAspectJAutoProxy 注解就可以了，代码如下：
+
+```java
+@SpringBootApplication
+@EnableAspectJAutoProxy
+public class SpringAopDemoApplication{
+    
+}
+```
+
+### 自定义AOP Annotation
+
+我们来了解一下如何使用aop以及aop的api，下面我们尝试自己定义一个aop的Annotation，@CalculateExecuteTime，任何使用该注解的方法，都会打印出该方法的执行时间
+
+#### 创建 Annotation
+
+```java
+package com.example.springaopdemo.myaop.annotation;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+/**
+ * 任何使用该注解的方法，都会打印出该方法的执行时间
+ */
+@Target(ElementType.METHOD) //该注解作用的对象
+@Retention(RetentionPolicy.RUNTIME) //该注解使用的时机
+public @interface CalculateExecuteTime {
+}
+```
+
+#### 创建切面
+
+```java
+package com.example.springaopdemo.myaop.aspect;
+
+import org.aspectj.lang.annotation.Aspect;
+import org.springframework.stereotype.Component;
+
+/**
+ * 切面aspect
+ */
+@Aspect
+@Component
+public class CalculateExecuteTimeAspect {
+}
+```
+
+#### 创建切点和通知
+
+```java
+package com.example.springaopdemo.myaop.aspect;
+
+import com.example.springaopdemo.myaop.annotation.CalculateExecuteTime;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.stereotype.Component;
+
+/**
+ * 切面aspect
+ */
+@Aspect
+@Component
+public class CalculateExecuteTimeAspect {
+
+    // 切点表达式，表示加了CalculateExecuteTime注解的都是切点，路径是自定义注解的全路径
+    @Pointcut("@annotation(com.example.springaopdemo.myaop.annotation.CalculateExecuteTime)")
+    public void pointcut(){
+
+    }
+
+    @Around("@annotation(calculateExecuteTime)")
+    public Object logExecutionTime(ProceedingJoinPoint joinPoint, CalculateExecuteTime calculateExecuteTime) throws Throwable{
+
+        long start = System.currentTimeMillis();
+        Object proceed = joinPoint.proceed();
+        long executionTime = System.currentTimeMillis() - start;
+        System.out.println(joinPoint.getSignature() + " executed in " + executionTime + "ms");
+        return proceed;
+    }
+}
+```
+
+这里的 ProceedingJoinPoint 代表连接的方法
+
+#### 在方法上加上自定义注解
+
+```java
+package com.example.springaopdemo;
+
+import com.example.springaopdemo.myaop.annotation.CalculateExecuteTime;
+import org.springframework.stereotype.Service;
+
+import java.util.concurrent.TimeUnit;
+
+/**
+ * 创建业务对象
+ * 业务对象就是一个普通的java类，然后有自己的一些业务逻辑。我们就以下面这个 <strong>微信服务</strong>
+ * 对象为例，这个对象只有一个简单的业务逻辑就是 分享文章到朋友圈
+ */
+
+@Service //注入到spring ioc 中的 bean
+public class WeixinService {
+
+    @CalculateExecuteTime
+    public void share(String articleUrl){
+
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        }catch (Exception exception){
+
+        }
+    }
+}
+```
+
+这里我们模拟该方法会执行3s的时间，运行程序以后得到如下结果：
+
+![](https://img.imgdb.cn/item/605f60f08322e6675c7b52e0.jpg)
+
+可以看到该 Advice 已经生效了。
+
+<i>本文参考于: [Spring AOP 教程](https://www.jianshu.com/p/a21256903fdd) 和 [Spring AOP 自定义注解实现](https://juejin.cn/post/6944382595434020877/) </i>
 
