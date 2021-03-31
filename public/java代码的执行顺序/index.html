@@ -14,7 +14,7 @@
 
     <title>Java代码的执行顺序 | blog</title>
 
-    <link rel="stylesheet" href="/css/meme.min.3e7f716cf544006725fbd8e1fec3772f8c5dee06849c4e3958b086b9dd3984f1.css"/>
+    <link rel="stylesheet" href="/css/meme.min.3f5aebdcac1b8245d13d6cd914f1782deefae3b08f6b4b00e23dc60cc32d66f6.css"/>
 
     
     
@@ -54,7 +54,7 @@
         "@context": "https://schema.org",
         "@type": "BlogPosting",
         "datePublished": "2021-03-12T22:27:01+08:00",
-        "dateModified": "2021-03-12T22:32:51+08:00",
+        "dateModified": "2021-03-13T15:40:20+08:00",
         "url": "https://my-hugo-blog-latin-xiao-mao.vercel.app/java%E4%BB%A3%E7%A0%81%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/",
         "headline": "Java代码的执行顺序",
         "description": "静态代码的执行一定先于 main 方法，静态代码块和静态成员变量的执行顺序是由代码位置决定的，…",
@@ -106,7 +106,7 @@
 <meta property="og:locale" content="en" /><meta property="og:image" content="https://img.imgdb.cn/item/602e3d51343ca1fbf9f192da.png" />
 <meta property="og:type" content="article" />
     <meta property="article:published_time" content="2021-03-12T22:27:01&#43;08:00" />
-    <meta property="article:modified_time" content="2021-03-12T22:32:51&#43;08:00" />
+    <meta property="article:modified_time" content="2021-03-13T15:40:20&#43;08:00" />
     
     <meta property="article:section" content="posts" />
 
@@ -217,7 +217,7 @@
     
     
         
-        <time datetime="2021-03-12T22:32:51&#43;08:00" class="post-meta-item modified dt-updated"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon post-meta-icon"><path d="M400 64h-48V12c0-6.627-5.373-12-12-12h-40c-6.627 0-12 5.373-12 12v52H160V12c0-6.627-5.373-12-12-12h-40c-6.627 0-12 5.373-12 12v52H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm-6 400H54a6 6 0 0 1-6-6V160h352v298a6 6 0 0 1-6 6zm-52.849-200.65L198.842 404.519c-4.705 4.667-12.303 4.637-16.971-.068l-75.091-75.699c-4.667-4.705-4.637-12.303.068-16.971l22.719-22.536c4.705-4.667 12.303-4.637 16.97.069l44.104 44.461 111.072-110.181c4.705-4.667 12.303-4.637 16.971.068l22.536 22.718c4.667 4.705 4.636 12.303-.069 16.97z"/></svg>&nbsp;2021.3.12</time>
+        <time datetime="2021-03-13T15:40:20&#43;08:00" class="post-meta-item modified dt-updated"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon post-meta-icon"><path d="M400 64h-48V12c0-6.627-5.373-12-12-12h-40c-6.627 0-12 5.373-12 12v52H160V12c0-6.627-5.373-12-12-12h-40c-6.627 0-12 5.373-12 12v52H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm-6 400H54a6 6 0 0 1-6-6V160h352v298a6 6 0 0 1-6 6zm-52.849-200.65L198.842 404.519c-4.705 4.667-12.303 4.637-16.971-.068l-75.091-75.699c-4.667-4.705-4.637-12.303.068-16.971l22.719-22.536c4.705-4.667 12.303-4.637 16.97.069l44.104 44.461 111.072-110.181c4.705-4.667 12.303-4.637 16.971.068l22.536 22.718c4.667 4.705 4.636 12.303-.069 16.97z"/></svg>&nbsp;2021.3.13</time>
     
     
     
@@ -250,11 +250,9 @@
 <p><img src="https://img.imgdb.cn/item/602e3d51343ca1fbf9f192da.png" alt="https://img.imgdb.cn/item/602e3d51343ca1fbf9f192da.png"></p>
 <p><img src="https://img.imgdb.cn/item/602e3e82343ca1fbf9f2068b.png" alt="https://img.imgdb.cn/item/602e3e82343ca1fbf9f2068b.png"></p>
 <ol>
-<li>
-<p>如果是非静态代码块和非静态成员变量，不执行</p>
-<p><img src="https://img.imgdb.cn/item/602e3e82343ca1fbf9f20684.png" alt="https://img.imgdb.cn/item/602e3e82343ca1fbf9f20684.png"></p>
-</li>
+<li>如果是非静态代码块和非静态成员变量，不执行</li>
 </ol>
+<p><img src="https://img.imgdb.cn/item/602e3e82343ca1fbf9f20684.png" alt="https://img.imgdb.cn/item/602e3e82343ca1fbf9f20684.png"></p>
 <p><img src="https://img.imgdb.cn/item/602e3e82343ca1fbf9f20686.png" alt="https://img.imgdb.cn/item/602e3e82343ca1fbf9f20686.png"></p>
 <p>只有在创建 TestOrder 对象的时候，才会执行非静态代码块和非静态成员变量</p>
 <p><img src="https://img.imgdb.cn/item/602e3e82343ca1fbf9f20688.png" alt="https://img.imgdb.cn/item/602e3e82343ca1fbf9f20688.png"></p>
@@ -473,9 +471,9 @@
 
         
     <div class="updated-badge-container">
-        <span title="Updated @ 2021-03-12 22:32:51 CST" style="cursor:help">
+        <span title="Updated @ 2021-03-13 15:40:20 CST" style="cursor:help">
 
-<svg xmlns="http://www.w3.org/2000/svg" width="130" height="20" class="updated-badge"><linearGradient id="b" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="a"><rect width="130" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#a)"><path class="updated-badge-left" d="M0 0h55v20H0z"/><path class="updated-badge-right" d="M55 0h75v20H55z"/><path fill="url(#b)" d="M0 0h130v20H0z"/></g><g fill="#fff" text-anchor="middle" font-size="110"><text x="285" y="150" fill="#010101" fill-opacity=".3" textLength="450" transform="scale(.1)">updated</text><text x="285" y="140" textLength="450" transform="scale(.1)">updated</text><text x="915" y="150" fill="#010101" fill-opacity=".3" textLength="650" transform="scale(.1)">2021-03-12</text><text x="915" y="140" textLength="650" transform="scale(.1)">2021-03-12</text></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="130" height="20" class="updated-badge"><linearGradient id="b" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="a"><rect width="130" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#a)"><path class="updated-badge-left" d="M0 0h55v20H0z"/><path class="updated-badge-right" d="M55 0h75v20H55z"/><path fill="url(#b)" d="M0 0h130v20H0z"/></g><g fill="#fff" text-anchor="middle" font-size="110"><text x="285" y="150" fill="#010101" fill-opacity=".3" textLength="450" transform="scale(.1)">updated</text><text x="285" y="140" textLength="450" transform="scale(.1)">updated</text><text x="915" y="150" fill="#010101" fill-opacity=".3" textLength="650" transform="scale(.1)">2021-03-13</text><text x="915" y="140" textLength="650" transform="scale(.1)">2021-03-13</text></g></svg>
         </span></div>
 
 
@@ -578,23 +576,23 @@
             <ul class="related-list">
                 
                     <li class="related-item">
+                        <a href="/spring-aop%E5%AD%A6%E4%B9%A0%E4%B8%80/" class="related-link">Spring AOP学习（一）</a>
+                    </li>
+                
+                    <li class="related-item">
+                        <a href="/java%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B8%80/" class="related-link">Java知识点（一）</a>
+                    </li>
+                
+                    <li class="related-item">
+                        <a href="/%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%E6%89%B9%E9%87%8F%E9%87%8D%E5%91%BD%E5%90%8D%E5%9B%BE%E7%89%87/" class="related-link">代码实现批量重命名图片</a>
+                    </li>
+                
+                    <li class="related-item">
                         <a href="/java%E9%9D%A2%E8%AF%95%E9%A2%98%E4%B8%80/" class="related-link">Java面试题(一)</a>
                     </li>
                 
                     <li class="related-item">
                         <a href="/java%E4%B8%AD%E4%BD%BF%E7%94%A8hssfworkbook%E7%94%9F%E6%88%90excel/" class="related-link">Java中使用HSSFWorkbook生成excel</a>
-                    </li>
-                
-                    <li class="related-item">
-                        <a href="/java%E4%B8%ADio%E7%AC%94%E8%AE%B0/" class="related-link">Java中IO笔记</a>
-                    </li>
-                
-                    <li class="related-item">
-                        <a href="/python%E6%89%B9%E9%87%8F%E9%87%8D%E5%91%BD%E5%90%8D%E5%9B%BE%E7%89%87/" class="related-link">Python批量重命名图片</a>
-                    </li>
-                
-                    <li class="related-item">
-                        <a href="/%E7%AB%8B%E4%BD%93%E7%9B%B8%E5%86%8C/" class="related-link">立体相册</a>
                     </li>
                 
             </ul>

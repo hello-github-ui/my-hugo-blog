@@ -1,6 +1,6 @@
 ---
 title: "Redis主从搭建"
-date: 2021-03-128T21:20:13+08:00
+date: 2021-03-30T23:35:55+08:00
 draft: false
 categories: [笔记]
 tags: [Redis,Centos]

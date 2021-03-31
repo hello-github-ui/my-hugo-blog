@@ -1,6 +1,6 @@
 ---
 title: "Centos7安装Redis教程"
-date: 2021-03-28 T21:19:13+08:00
+date: 2021-03-29T23:35:55+08:00
 draft: false
 categories: [笔记]
 tags: [Redis,Centos]

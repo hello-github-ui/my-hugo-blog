@@ -23,22 +23,1421 @@
         
             <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
         
-        <lastBuildDate>Sat, 13 Mar 2021 12:17:23 &#43;0800</lastBuildDate>
+        <lastBuildDate>Wed, 31 Mar 2021 23:06:11 &#43;0800</lastBuildDate>
         
             <atom:link rel="self" type="application/rss&#43;xml" href="https://my-hugo-blog-latin-xiao-mao.vercel.app/rss.xml" />
         
         
             <item>
-                <title>Python批量重命名图片</title>
-                <link>https://my-hugo-blog-latin-xiao-mao.vercel.app/python%E6%89%B9%E9%87%8F%E9%87%8D%E5%91%BD%E5%90%8D%E5%9B%BE%E7%89%87/</link>
-                <guid isPermaLink="true">https://my-hugo-blog-latin-xiao-mao.vercel.app/python%E6%89%B9%E9%87%8F%E9%87%8D%E5%91%BD%E5%90%8D%E5%9B%BE%E7%89%87/</guid>
+                <title>Redis主从搭建</title>
+                <link>https://my-hugo-blog-latin-xiao-mao.vercel.app/redis%E4%B8%BB%E4%BB%8E%E6%90%AD%E5%BB%BA/</link>
+                <guid isPermaLink="true">https://my-hugo-blog-latin-xiao-mao.vercel.app/redis%E4%B8%BB%E4%BB%8E%E6%90%AD%E5%BB%BA/</guid>
+                <pubDate>Tue, 30 Mar 2021 23:35:55 &#43;0800</pubDate>
+                
+                    <author>reuixiy@gmail.com (古月轩039)</author>
+                
+                <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
+                
+                    <description>&lt;h2 id=&#34;redis主从复制&#34;&gt;Redis主从复制&lt;/h2&gt;
+&lt;p&gt;redis的主从复制概念和mysql的主从复制大概类似。一台主机master，一台从机slaver。master主机数据更新后根据配置和策略，自动同步到slaver从机，Master以写为主，Slaver以读为主。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/60601b8a8322e6675cccfc55.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;主要用途&#34;&gt;主要用途&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;读写分离：适用于读多写少的应用，增加多个从机，提高读的速度，提高程序的并发性&lt;/li&gt;
+&lt;li&gt;数据容灾恢复：从机复制主机的数据，相当于数据备份，如果主机数据丢失，那么可以通过从机存储的数据进行恢复&lt;/li&gt;
+&lt;li&gt;高并发、高可用集群实现的基础：在高并发的场景下，就算主机挂了，从机可以实现主从切换，从机自动成为主机对外提供服务&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;一主多从配置&#34;&gt;一主多从配置&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/60601c408322e6675ccd5f78.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;环境准备&#34;&gt;环境准备&lt;/h2&gt;
+&lt;p&gt;我们用一台机器模拟三个机器，&lt;/p&gt;
+&lt;p&gt;将下载下来的redis复制三份&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;cp -R redis-5.0.3 redis01
+cp -R redis-5.0.3 redis02
+cp -R redis-5.0.3 redis03
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;如下图所示：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/60602b838322e6675cd5fd98.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;然后，在一台机器上启动三个redis，一个作 master，两个作 slaver，&lt;/p&gt;
+&lt;p&gt;master 端口：6380&lt;/p&gt;
+&lt;p&gt;slaver1 端口：6381&lt;/p&gt;
+&lt;p&gt;slaver2 端口：6382&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/6060353f8322e6675cdb36e2.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+</description>
+                
+                
+                
+                
+                
+                    
+                        
+                            
+                                
+                                
+                                
+                                    <category domain="https://my-hugo-blog-latin-xiao-mao.vercel.app/categories/%E7%AC%94%E8%AE%B0/">笔记</category>
+                                
+                            
+                        
+                    
+                        
+                            
+                                
+                                
+                                
+                                    <category domain="https://my-hugo-blog-latin-xiao-mao.vercel.app/tags/redis/">Redis</category>
+                                
+                            
+                                
+                                
+                                
+                                    <category domain="https://my-hugo-blog-latin-xiao-mao.vercel.app/tags/centos/">Centos</category>
+                                
+                            
+                        
+                    
+                
+            </item>
+        
+            <item>
+                <title>Spring AOP学习（一）</title>
+                <link>https://my-hugo-blog-latin-xiao-mao.vercel.app/spring-aop%E5%AD%A6%E4%B9%A0%E4%B8%80/</link>
+                <guid isPermaLink="true">https://my-hugo-blog-latin-xiao-mao.vercel.app/spring-aop%E5%AD%A6%E4%B9%A0%E4%B8%80/</guid>
+                <pubDate>Sat, 27 Mar 2021 13:57:21 &#43;0800</pubDate>
+                
+                    <author>reuixiy@gmail.com (古月轩039)</author>
+                
+                <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
+                
+                    <description>&lt;h2 id=&#34;aop简介&#34;&gt;AOP简介&lt;/h2&gt;
+&lt;p&gt;来自于官方的定义：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Aspect-oriented Programming (AOP) complements Object-oriented Programming (OOP) by providing another way of thinking about program structure. The key unit of modularity in OOP is the class, whereas in AOP the unit of modularity is the aspect. Aspects enable the modularization of concerns that cut across multiple types and objects.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;面向切面编程，是spring框架中的一个重要内容。利用 aop 可以对业务逻辑的各个部分进行隔离，从而使得业务逻辑各部分之间的耦合度降低，提高代码的可重用性，提高开发效率。&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;AOP一般用来实现以下几个功能：&lt;/mark&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;日志记录，性能统计，安全控制，权限控制，事务处理，异常处理，资源池管理等&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;目前最受欢迎的aop库有两个，一个是 &lt;mark&gt;AspectJ&lt;/mark&gt;，另一个是 &lt;mark&gt;Spring AOP&lt;/mark&gt;。&lt;/p&gt;
+&lt;p&gt;我们先来学习 Spring AOP，在学习之前，先学习几个 AOP 中的知识点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Aspect：即切面，切面一般定义为一个java类，切面在 ApplicationContext 中的 &lt;code&gt;&amp;lt;aop:aspect&amp;gt;&lt;/code&gt; 来配置。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Joinpoint：即连接点，程序执行的某个点，比如方法执行。构造函数调用或者字段赋值等。在Spring AOP中，连接点只会有 方法调用（method execution）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Advice：即通知，切面对于某个连接点所产生的动作，可以理解位：在连接点处要执行的代码，例如 TestAspect 对 com.spring.service 包下所有类的方法进行日志记录的动作就是一个Advice。其中一个切面可以包含多个Advice。Advice总共有如下5种类型：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;  1. 前置通知（Before advice）：在某个连接点（joinpoint）之前执行，xml中在&amp;lt;aop:aspect&amp;gt;里面使用&amp;lt;aop:before&amp;gt;元素进行声明；注解中使用@Before声明。
+  2. 后置通知（After advice）：在某个连接点退出的时候执行，xml中在&amp;lt;aop:aspect&amp;gt;里面使用&amp;lt;aop:after&amp;gt;元素进行声明；注解中使用@After声明。
+  3. 返回后通知（After return advice）：在某个连接点正常完成后执行的通知，不包括抛出异常的情况。xml中在&amp;lt;aop:aspect&amp;gt;里面使用&amp;lt;after-returning&amp;gt;元素进行声明。注解中使用@AfterReturning声明。
+  4. 环绕通知（Around advice）：包围一个连接点的通知，可以在方法的调用前后完成自定义的行为，也可以选择不执行。xml中在&amp;lt;aop:aspect&amp;gt;里面使用&amp;lt;aop:around&amp;gt;元素进行声明；注解中使用@Around声明。
+  5. 抛出异常后通知（After throwing advice）：在方法抛出异常退出时执行的通知。xml中在&amp;lt;aop:aspect&amp;gt;里面使用&amp;lt;aop:after-throwing&amp;gt;元素进行声明；注解中使用@AfterThrowing声明。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Pointcut：即切点，一个匹配连接点的正则表达式。当一个连接点匹配到切点时，一个关联到这个切点的特定的通知（Advice）会被执行。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Weaving：即编织，负责将切面和目标对象链接，以创建通知对象，在Spring AOP中没有这个东西&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在spring框架中，aop有两种动态代理方式，其一是基于JDK的动态代理，需要代理的类实现某一个接口，其二是基于CGLIB 的方式，该方式不需要类实现接口就能进行代理。&lt;/p&gt;
+&lt;h2 id=&#34;实操&#34;&gt;实操&lt;/h2&gt;
+&lt;p&gt;接下来我们通过一个小demo来实操演练以下。&lt;/p&gt;
+&lt;h3 id=&#34;创建项目&#34;&gt;创建项目&lt;/h3&gt;
+&lt;p&gt;我们直接在 idea 中新建一个 spring initializr 工程，什么也不需要选择，创建一个空的即可。&lt;/p&gt;
+&lt;p&gt;然后修改pom文件如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;nt&#34;&gt;&amp;lt;project&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;xmlns=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;xmlns:xsi=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span&gt;
+         &lt;span class=&#34;na&#34;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;modelVersion&amp;gt;&lt;/span&gt;4.0.0&lt;span class=&#34;nt&#34;&gt;&amp;lt;/modelVersion&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;parent&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.springframework.boot&lt;span class=&#34;nt&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;spring-boot-starter-parent&lt;span class=&#34;nt&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;2.4.4&lt;span class=&#34;nt&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;relativePath/&amp;gt;&lt;/span&gt; &lt;span class=&#34;c&#34;&gt;&amp;lt;!-- lookup parent from repository --&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/parent&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;com.example&lt;span class=&#34;nt&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;spring-aop-demo&lt;span class=&#34;nt&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;0.0.1-SNAPSHOT&lt;span class=&#34;nt&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;spring-aop-demo&lt;span class=&#34;nt&#34;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;description&amp;gt;&lt;/span&gt;Demo project for Spring Boot&lt;span class=&#34;nt&#34;&gt;&amp;lt;/description&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;properties&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;java.version&amp;gt;&lt;/span&gt;11&lt;span class=&#34;nt&#34;&gt;&amp;lt;/java.version&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;project.build.sourceEncoding&amp;gt;&lt;/span&gt;UTF-8&lt;span class=&#34;nt&#34;&gt;&amp;lt;/project.build.sourceEncoding&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;project.reporting.outputEncoding&amp;gt;&lt;/span&gt;UTF-8&lt;span class=&#34;nt&#34;&gt;&amp;lt;/project.reporting.outputEncoding&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/properties&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;dependencies&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+            &lt;span class=&#34;nt&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.springframework.boot&lt;span class=&#34;nt&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+            &lt;span class=&#34;nt&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;spring-boot-starter-aop&lt;span class=&#34;nt&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+            &lt;span class=&#34;nt&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.springframework.boot&lt;span class=&#34;nt&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+            &lt;span class=&#34;nt&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;spring-boot-starter-test&lt;span class=&#34;nt&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+            &lt;span class=&#34;nt&#34;&gt;&amp;lt;scope&amp;gt;&lt;/span&gt;test&lt;span class=&#34;nt&#34;&gt;&amp;lt;/scope&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/dependencies&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;build&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;plugins&amp;gt;&lt;/span&gt;
+            &lt;span class=&#34;nt&#34;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
+                &lt;span class=&#34;nt&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.springframework.boot&lt;span class=&#34;nt&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+                &lt;span class=&#34;nt&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;spring-boot-maven-plugin&lt;span class=&#34;nt&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+            &lt;span class=&#34;nt&#34;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;/plugins&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/build&amp;gt;&lt;/span&gt;
+
+&lt;span class=&#34;nt&#34;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;创建业务对象&#34;&gt;创建业务对象&lt;/h3&gt;
+&lt;p&gt;业务对象就是一个普通的Java类，然后有自己的一些业务逻辑。我们就以下面这个&lt;strong&gt;微信服务&lt;/strong&gt;对象为例，这个对象只有一个简单的业务逻辑就是：分享文章到朋友圈。&lt;/p&gt;
+&lt;p&gt;在如下图所示位置创建对象：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/605ed9da8322e6675c26b157.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;注意，上面使用到了 &lt;code&gt;@Service&lt;/code&gt;  注解，表示将这个类注入到 spring ioc 中，成为spring容器中的一个  bean（只有这样后，才会在下面使用 getBean 获取到这个  bean 对象）&lt;/mark&gt;&lt;/p&gt;
+&lt;p&gt;在该类中定义如上的方法。&lt;/p&gt;
+&lt;p&gt;然后在 SpringAopDemoApplication 启动类中增加如下代码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;kn&#34;&gt;package&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;com.example.springaopdemo&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;org.springframework.boot.SpringApplication&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;org.springframework.boot.autoconfigure.SpringBootApplication&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;org.springframework.context.ApplicationContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;nd&#34;&gt;@SpringBootApplication&lt;/span&gt;
+&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;SpringAopDemoApplication&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+
+    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[]&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;args&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+
+        &lt;span class=&#34;n&#34;&gt;ApplicationContext&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;applicationContext&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SpringApplication&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;run&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SpringAopDemoApplication&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;args&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;WeixinService&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;weixinService&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;applicationContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getBean&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;WeixinService&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;weixinService&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;share&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;https://www.jianshu.com/u/db7d7a281529&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+    &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;之后点击运行按钮，启动程序后在控制台可以看到如下输出：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/605edaba8322e6675c275584.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;定义切面aspect&#34;&gt;定义切面（Aspect）&lt;/h3&gt;
+&lt;p&gt;上面我们创建了自己的业务对象，那么我们现在创建一个切面，使用 AOP 在不对业务进行修改的情况下增加一些额外的功能，比如在分享到朋友圈之后我们将这次分享记录到日志中。&lt;/p&gt;
+&lt;p&gt;我们按照上面的方法在同样的包中创建类 &lt;code&gt;WeixinServiceAspect&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;kn&#34;&gt;package&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;com.example.springaopdemo&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;org.aspectj.lang.JoinPoint&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;org.aspectj.lang.annotation.AfterReturning&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;org.aspectj.lang.annotation.Aspect&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;org.springframework.stereotype.Component&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;cm&#34;&gt;/**
+&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt; * 定义 切面（Aspect）
+&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt; */&lt;/span&gt;
+&lt;span class=&#34;nd&#34;&gt;@Aspect&lt;/span&gt;
+&lt;span class=&#34;nd&#34;&gt;@Component&lt;/span&gt;
+&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;WeixinServiceAspect&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+
+    &lt;span class=&#34;c1&#34;&gt;// 使用返回后通知（Advice）
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;nd&#34;&gt;@AfterReturning&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;execution(public void WeixinService.share(String))&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;JoinPoint&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;joinPoint&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;){&lt;/span&gt;   &lt;span class=&#34;c1&#34;&gt;//JoinPoint连接点
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;joinPoint&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getSignature&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34; executed&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+    &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;同时在 SpringAopDemoApplication 中增加注解 &lt;code&gt;@EnableAspectJAutoProxy&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;那我们现在再来看一下程序的运行结果与上面比较有什么不一样呢？&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/605edffb8322e6675c2a2722.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;经过比较我们可以发现增加的日志记录已经在控制台输出了，但是很显然我们并没有修改我们原先的业务对象。&lt;/p&gt;
+&lt;p&gt;到这里，大家应该对 aop 有了一个比较直观的感受了，下面我们就来具体说一说 Spring AOP 给我们提供了哪些 api 来使用。&lt;/p&gt;
+&lt;h3 id=&#34;api&#34;&gt;API&lt;/h3&gt;
+&lt;h4 id=&#34;aspect-定义&#34;&gt;Aspect 定义&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/605ee1ae8322e6675c2b23f4.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;在spring 中使用 Aspect 需要使用 @Component 直接将其标记为一个 Bean，&lt;/p&gt;
+&lt;p&gt;并且使用 @Aspect 注解将其标记为一个切面&lt;/p&gt;
+&lt;p&gt;然后在该类中定义上面我们所说的切点，通知等。&lt;/p&gt;
+&lt;h4 id=&#34;pointcut-定义&#34;&gt;PointCut 定义&lt;/h4&gt;
+&lt;p&gt;这里我们说一下 pointcut 的表达式如何写，我们首先将上面例子中的切面类修改为如下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/605ee2878322e6675c2b913e.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;使用 @Pointcut 注解的便是切点的定义&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;切点定义在方法上，并使用 @Pointcut 注解，注解中的值便是切点的表达式&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;切点的名称就是方法的名称，这里是 shareCut() ，注意这里有括号&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;若要将具体的通知 Advice 关联在某个切点上，只需要在 Advice 的注解上写上切点的名称就可以了，如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 使用返回后通知（Advice）
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 连接点有多个，通过名称就将通知与某个切点关联起来了
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;nd&#34;&gt;@AfterReturning&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;shareCut()&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;JoinPoint&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;joinPoint&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;){&lt;/span&gt;   &lt;span class=&#34;c1&#34;&gt;//JoinPoint连接点
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;  
+        &lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;joinPoint&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getSignature&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34; executed&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+    &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;pre&gt;&lt;code&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;pointcut-指示器&#34;&gt;Pointcut 指示器&lt;/h4&gt;
+&lt;p&gt;切点的表达式以指示器开始，指示器就是一种关键字，用来告诉 Spring AOP 如何匹配连接点，Spring AOP 提供了以下几种指示器&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;e&#39;x&#39;ecution&lt;/li&gt;
+&lt;li&gt;within&lt;/li&gt;
+&lt;li&gt;this 和 target&lt;/li&gt;
+&lt;li&gt;args&lt;/li&gt;
+&lt;li&gt;@target&lt;/li&gt;
+&lt;li&gt;@annotation&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;下面我们依次说明这些指示器的作用&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;execution&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;该指示器用来匹配方法执行连接点，即匹配哪个方法执行，如&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@Pointcut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;execution(public String com.example.springaopdemo.UserDao.findById(Long))&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;上面这个切点会匹配在UserDao类中findById方法的调用，并且需要该方法是public的，返回值类型为String，只有一个Long的参数。&lt;/p&gt;
+&lt;p&gt;切点的表达式同时还支持&lt;strong&gt;宽字符&lt;/strong&gt;匹配，如：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@Pointcut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;execution(* com.example.springaopdemo.UserDao.*(..))&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;上面的表达式中，第一个宽字符 * 匹配 任何返回类型，第二个宽字符 * 匹配 任何方法名，最后的参数 (..) 表达式匹配 &lt;strong&gt;任意数量任意类型&lt;/strong&gt; 的参数，也就是说该切点会匹配类中所有方法的调用。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;within&lt;/strong&gt;
+如果要匹配一个类中所有方法的调用，便可以用 within 指示器&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@Pointcut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;within(com.example.springaopdemo.UserDao)&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这样便可以匹配该类中所有方法的调用了。同时我们还可以匹配某个包下面的所有类的所有方法调用，如下面的例子：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@Pointcut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;within(com.example.springaopdemo..*)&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;this和target&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;如果目标对象实现了任何接口，Spring AOP会创建基于 CGLIB 的动态代理，这时候需要使用 target 指示器&lt;/p&gt;
+&lt;p&gt;如果目标对象没有实现任何接口，Spring AOP 会创建基于 JDK 的动态代理，这时候需要使用 this 指示器&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@Pointcut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;target(com.example.springaopdemo.A)&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;A实现了某个接口&lt;/span&gt;
+&lt;span class=&#34;nd&#34;&gt;@Pointcut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;this(com.example.springaopdemo.B)&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;B没有实现任何一个接口&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;args&lt;/strong&gt;
+该指示器用来匹配具体的方法参数&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@Pointcut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;execution(* *..find*(Long))&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这个切点会匹配任何以 find 开头并且只有一个 Long 类型的参数的方法&lt;/p&gt;
+&lt;p&gt;如果我们想匹配一个以 Long 类型开始的参数，后面的参数类型不做限制，我们可以使用如下的表达式：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@Pointcut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;execution(* *..find*(Long))&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;@target&lt;/strong&gt;
+该指示器不要和 target 指示器混淆，该指示器用于匹配连接点所在的类是否拥有指定类型的注解，如：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@Pointcut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;@target(org.springframework.stereotype.Repository)&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;@annotation&lt;/strong&gt;
+该指示器用于匹配连接点的方法是否具有某个注解&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@Pointcut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;@annotation(org.springframework.scheduling.annotion.Async)&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;组合切点表达式&lt;/strong&gt;
+切点表达式可以通过 &amp;amp;&amp;amp; 、|| 和 ！等操作符来组合，如&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@Pointcut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;@target(org.springframework.stereotype.Repository)&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;repositoryMethods&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{}&lt;/span&gt;
+ 
+&lt;span class=&#34;nd&#34;&gt;@Pointcut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;execution(* *..create*(Long,..))&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;firstLongParamMethods&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{}&lt;/span&gt;
+ 
+&lt;span class=&#34;nd&#34;&gt;@Pointcut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;repositoryMethods() &amp;amp;&amp;amp; firstLongParamMethods()&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;entityCreationMethods&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;上面的第三个切点需要同时满足第一个和第二个切点表达式&lt;/p&gt;
+&lt;h4 id=&#34;advice定义&#34;&gt;Advice定义&lt;/h4&gt;
+&lt;p&gt;Advice通知，即在连接点处要执行的代码，分为以下几种类型&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Around&lt;/li&gt;
+&lt;li&gt;Before&lt;/li&gt;
+&lt;li&gt;After&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;开启-advice&#34;&gt;开启 Advice&lt;/h4&gt;
+&lt;p&gt;如果要在Spring中使用Spring AOP，需要开启 Advice，使用 @EnableAspectJAutoProxy 注解就可以了，代码如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@SpringBootApplication&lt;/span&gt;
+&lt;span class=&#34;nd&#34;&gt;@EnableAspectJAutoProxy&lt;/span&gt;
+&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;SpringAopDemoApplication&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+    
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;自定义aop-annotation&#34;&gt;自定义AOP Annotation&lt;/h3&gt;
+&lt;p&gt;我们来了解一下如何使用aop以及aop的api，下面我们尝试自己定义一个aop的Annotation，@CalculateExecuteTime，任何使用该注解的方法，都会打印出该方法的执行时间&lt;/p&gt;
+&lt;h4 id=&#34;创建-annotation&#34;&gt;创建 Annotation&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;kn&#34;&gt;package&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;com.example.springaopdemo.myaop.annotation&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;java.lang.annotation.ElementType&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;java.lang.annotation.Retention&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;java.lang.annotation.RetentionPolicy&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;java.lang.annotation.Target&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;cm&#34;&gt;/**
+&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt; * 任何使用该注解的方法，都会打印出该方法的执行时间
+&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt; */&lt;/span&gt;
+&lt;span class=&#34;nd&#34;&gt;@Target&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ElementType&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;METHOD&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;//该注解作用的对象
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nd&#34;&gt;@Retention&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;RetentionPolicy&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;RUNTIME&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;//该注解使用的时机
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;nd&#34;&gt;@interface&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CalculateExecuteTime&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;创建切面&#34;&gt;创建切面&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;kn&#34;&gt;package&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;com.example.springaopdemo.myaop.aspect&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;org.aspectj.lang.annotation.Aspect&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;org.springframework.stereotype.Component&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;cm&#34;&gt;/**
+&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt; * 切面aspect
+&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt; */&lt;/span&gt;
+&lt;span class=&#34;nd&#34;&gt;@Aspect&lt;/span&gt;
+&lt;span class=&#34;nd&#34;&gt;@Component&lt;/span&gt;
+&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;CalculateExecuteTimeAspect&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;创建切点和通知&#34;&gt;创建切点和通知&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;kn&#34;&gt;package&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;com.example.springaopdemo.myaop.aspect&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;com.example.springaopdemo.myaop.annotation.CalculateExecuteTime&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;org.aspectj.lang.ProceedingJoinPoint&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;org.aspectj.lang.annotation.Around&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;org.aspectj.lang.annotation.Aspect&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;org.aspectj.lang.annotation.Pointcut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;org.springframework.stereotype.Component&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;cm&#34;&gt;/**
+&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt; * 切面aspect
+&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt; */&lt;/span&gt;
+&lt;span class=&#34;nd&#34;&gt;@Aspect&lt;/span&gt;
+&lt;span class=&#34;nd&#34;&gt;@Component&lt;/span&gt;
+&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;CalculateExecuteTimeAspect&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+
+    &lt;span class=&#34;c1&#34;&gt;// 切点表达式，表示加了CalculateExecuteTime注解的都是切点，路径是自定义注解的全路径
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;nd&#34;&gt;@Pointcut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;@annotation(com.example.springaopdemo.myaop.annotation.CalculateExecuteTime)&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;pointcut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(){&lt;/span&gt;
+
+    &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+
+    &lt;span class=&#34;nd&#34;&gt;@Around&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;@annotation(calculateExecuteTime)&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Object&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;logExecutionTime&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ProceedingJoinPoint&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;joinPoint&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CalculateExecuteTime&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;calculateExecuteTime&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;throws&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Throwable&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+
+        &lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;start&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;currentTimeMillis&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;Object&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;proceed&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;joinPoint&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;proceed&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+        &lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;executionTime&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;currentTimeMillis&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;start&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;joinPoint&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getSignature&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34; executed in &amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;executionTime&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;ms&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;proceed&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+    &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这里的 ProceedingJoinPoint 代表连接的方法&lt;/p&gt;
+&lt;h4 id=&#34;在方法上加上自定义注解&#34;&gt;在方法上加上自定义注解&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;kn&#34;&gt;package&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;com.example.springaopdemo&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;com.example.springaopdemo.myaop.annotation.CalculateExecuteTime&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;org.springframework.stereotype.Service&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;java.util.concurrent.TimeUnit&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;cm&#34;&gt;/**
+&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt; * 创建业务对象
+&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt; * 业务对象就是一个普通的java类，然后有自己的一些业务逻辑。我们就以下面这个 &amp;lt;strong&amp;gt;微信服务&amp;lt;/strong&amp;gt;
+&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt; * 对象为例，这个对象只有一个简单的业务逻辑就是 分享文章到朋友圈
+&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt; */&lt;/span&gt;
+
+&lt;span class=&#34;nd&#34;&gt;@Service&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;//注入到spring ioc 中的 bean
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;WeixinService&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+
+    &lt;span class=&#34;nd&#34;&gt;@CalculateExecuteTime&lt;/span&gt;
+    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;share&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;articleUrl&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;){&lt;/span&gt;
+
+        &lt;span class=&#34;k&#34;&gt;try&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;n&#34;&gt;TimeUnit&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;SECONDS&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;sleep&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+        &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;catch&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Exception&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;exception&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;){&lt;/span&gt;
+
+        &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+    &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这里我们模拟该方法会执行3s的时间，运行程序以后得到如下结果：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/605f60f08322e6675c7b52e0.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;可以看到该 Advice 已经生效了。&lt;/p&gt;
+&lt;p&gt;&lt;i&gt;本文参考于: &lt;a href=&#34;https://www.jianshu.com/p/a21256903fdd&#34;&gt;Spring AOP 教程&lt;/a&gt; 和 &lt;a href=&#34;https://juejin.cn/post/6944382595434020877/&#34;&gt;Spring AOP 自定义注解实现&lt;/a&gt; &lt;/i&gt;&lt;/p&gt;
+</description>
+                
+                
+                
+                
+                
+                    
+                        
+                            
+                                
+                                
+                                
+                                    <category domain="https://my-hugo-blog-latin-xiao-mao.vercel.app/categories/%E7%BC%96%E7%A8%8B/">编程</category>
+                                
+                            
+                        
+                    
+                        
+                            
+                                
+                                
+                                
+                                    <category domain="https://my-hugo-blog-latin-xiao-mao.vercel.app/tags/spring-aop/">Spring AOP</category>
+                                
+                            
+                                
+                                
+                                
+                                    <category domain="https://my-hugo-blog-latin-xiao-mao.vercel.app/tags/java/">Java</category>
+                                
+                            
+                                
+                                
+                                
+                                    <category domain="https://my-hugo-blog-latin-xiao-mao.vercel.app/tags/aop/">AOP</category>
+                                
+                            
+                        
+                    
+                
+            </item>
+        
+            <item>
+                <title>深圳合租</title>
+                <link>https://my-hugo-blog-latin-xiao-mao.vercel.app/%E6%B7%B1%E5%9C%B3%E5%90%88%E7%A7%9F/</link>
+                <guid isPermaLink="true">https://my-hugo-blog-latin-xiao-mao.vercel.app/%E6%B7%B1%E5%9C%B3%E5%90%88%E7%A7%9F/</guid>
+                <pubDate>Thu, 25 Mar 2021 23:02:05 &#43;0800</pubDate>
+                
+                    <author>reuixiy@gmail.com (古月轩039)</author>
+                
+                <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
+                
+                    <description>&lt;p&gt;&lt;em&gt;我来深圳了&lt;/em&gt;
+2021年我来到了深圳，深圳的中心区（罗湖，福田，南山）消费是真的高的离谱，所以我呢选择了与别人合租，诺就是下图所示的房间环境，给你们看一下吧（位置还是挺好的，紧邻上沙地铁站，出了楼道门就是地铁站了）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/605caabf8322e6675cdfbecb.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/605caabf8322e6675cdfbed1.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/605caabf8322e6675cdfbed7.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/605caabf8322e6675cdfbede.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/605caabf8322e6675cdfbee5.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/605caafb8322e6675cdfe604.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/605caafb8322e6675cdfe60a.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;我住的呢就是刚进门你们看到挂衣服的那个床位，诶呀生活压力大啊。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;接下来呢&lt;/em&gt;
+我打算好好努力干一段时间，攒点钱，之前自己实在是太任性了，也没挣到什么钱，真是羞愧呢，正如我今天看到&lt;a href=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app/%E6%B7%B1%E5%9C%B3%E5%90%88%E7%A7%9F/#&#34;&gt;敖丙&lt;/a&gt;离职的这篇文章说的那样，我们做不到逆风而起，但却可以选择向阳而生，加油吧！！！&lt;/p&gt;
+</description>
+                
+                
+                
+                
+                
+                    
+                        
+                            
+                                
+                                
+                                
+                                    <category domain="https://my-hugo-blog-latin-xiao-mao.vercel.app/categories/%E7%94%9F%E6%B4%BB/">生活</category>
+                                
+                            
+                        
+                    
+                        
+                            
+                                
+                                
+                                
+                                    <category domain="https://my-hugo-blog-latin-xiao-mao.vercel.app/tags/%E5%BF%83%E6%83%85/">心情</category>
+                                
+                            
+                        
+                    
+                
+            </item>
+        
+            <item>
+                <title>Java知识点（一）</title>
+                <link>https://my-hugo-blog-latin-xiao-mao.vercel.app/java%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B8%80/</link>
+                <guid isPermaLink="true">https://my-hugo-blog-latin-xiao-mao.vercel.app/java%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B8%80/</guid>
+                <pubDate>Fri, 19 Mar 2021 00:40:02 &#43;0800</pubDate>
+                
+                    <author>reuixiy@gmail.com (古月轩039)</author>
+                
+                <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
+                
+                    <description>&lt;h2 id=&#34;sql&#34;&gt;sql&lt;/h2&gt;
+&lt;h3 id=&#34;mysql优化你是怎么做的&#34;&gt;mysql优化你是怎么做的？&lt;/h3&gt;
+&lt;p&gt;设计数据库时一定要考虑三大范式（确保每一列都保持原子性、确保表中的每一列都和主键相关、确保每一列都和主键列直接相关，而不是间接相关）&lt;/p&gt;
+&lt;h3 id=&#34;mysql的行级锁表级锁&#34;&gt;mysql的行级锁，表级锁&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;行级锁&lt;/strong&gt;是mysql中锁定粒度最细的一种锁，表示只对当前的行进行加锁。行级锁能大大减少数据库操作的冲突。行级锁分为 共享锁和排他锁&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;特点：开销大，加锁慢，会出现死锁；锁定粒度最小，发生锁冲突的概率最小，并发度也最高&lt;/mark&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;表级锁&lt;/strong&gt;是mysql中锁定粒度最大的一种锁，表示对当前操作的整张表加锁。最常使用的 MyISAM 与 InnoDB 都支持表级锁定。表级锁定分为 表共享读锁（共享锁）与 表独占写锁（排他锁）&lt;/p&gt;
+&lt;p&gt;特点：开销小，加锁快，不会出现死锁；锁定粒度大，发生锁冲突的概率最大，并发度最低&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;页级锁&lt;/strong&gt;是mysql中锁定粒度介于行级锁和表级锁中间的一种锁。表级锁速度快，但冲突多，行级锁冲突少，但速度慢。因此，采取了折中的页级锁，一次锁定相邻的一组记录。&lt;/p&gt;
+&lt;p&gt;特点：开销和加锁时间介于表锁和行锁之间；会出现死锁；锁定粒度介于表锁和行锁之间，并发度一般&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在 innodb 引擎中既支持行级锁也支持表级锁，那么什么时候会锁住整张表？什么时候只锁住一行呢？&lt;/p&gt;
+&lt;p&gt;innodb 行级锁是通过给索引上的 索引项 加锁来实现，这种特点意味着：&lt;mark&gt;在innodb中只有通过索引条件（不论是主键索引，非主键索引还是普通索引）检索数据时，innodb才会使用行级锁，否则innodb将使用表级锁&lt;/mark&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在mysql中，&lt;strong&gt;行级锁&lt;/strong&gt;并不是直接锁定记录，而是锁定索引。索引分为主键索引和非主键索引两种。如果一条sql语句操作了主键索引，mysql就会锁定这条主键索引；如果一条sql语句操作了非主键索引，mysql就会先 锁定该 非主键索引，再锁定相关的主键索引；在进行update，delete操作时，mysql不仅锁定where条件扫描过的所有索引记录，而且会锁定相邻的键值，即所谓的next-key locking&lt;/p&gt;
+&lt;p&gt;当两个事物同时执行，一个锁住了主键索引，在等待其它相关索引；另一个锁定了非主键索引，在等待主键索引。这样就会发生死锁。发生死锁后，innodb一般都可以检测到，并使一个事物释放锁回退，另一个获取锁完成事物。&lt;/p&gt;
+&lt;h3 id=&#34;mysql避免死锁的方法&#34;&gt;mysql避免死锁的方法&lt;/h3&gt;
+&lt;p&gt;有多种方法可以避免死锁，这里只介绍常见的三种：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果不同程序会并发存取多张表，尽量约定以相同的顺序访问表，可以大大降低发生死锁的可能性&lt;/li&gt;
+&lt;li&gt;在同一个事物中，尽可能做到一次锁定所需要的 所有资源，减少死锁产生概率&lt;/li&gt;
+&lt;li&gt;对于非常容易发生死锁的业务，可以尝试使用升级锁定颗粒度，比如通过表级锁来减少死锁产生的概率&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;内存溢出的解决方法&#34;&gt;内存溢出的解决方法&lt;/h3&gt;
+&lt;p&gt;引起内存溢出的原因有多种，常见的有以下几种：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;内存中加载的数据量过于庞大，如一次性从数据库中取出过多数据；&lt;/li&gt;
+&lt;li&gt;集合类中有对 对象的引用，使用完以后未清空，使得JVM不能自动回收；&lt;/li&gt;
+&lt;li&gt;代码中存在死循环或错误的递归或循环产生过多重复的对象实体（这一类属于代码层错误）；&lt;/li&gt;
+&lt;li&gt;项目中引入的第三方依赖有BUG；&lt;/li&gt;
+&lt;li&gt;JVM启动参数内存值设定的过小。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;解决方案&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;第一步：修改JVM启动参数，直接增加内存空间（-Xms，-Xmx参数一定不要忘记加）。&lt;/p&gt;
+&lt;p&gt;第二步：检查错误日志，查看 &lt;code&gt;OutOfMemory&lt;/code&gt; 错误前是否有其它异常或错误。&lt;mark&gt;线上的话，可以使用Dump下来分析&lt;/mark&gt;&lt;/p&gt;
+&lt;p&gt;第三步：对代码进行分析，找出可能发生内存溢出的位置。&lt;/p&gt;
+&lt;p&gt;第四步：使用内存查看工具动态查看内存使用情况。某个项目上线后，每次启动系统两天后，就会出现内存溢出的错误，这种情况一般都是代码中出现了缓慢的内存泄漏。这时就要用到内存查看工具了，比如 &lt;code&gt;JProbe Profiler&lt;/code&gt;，&lt;code&gt;Jconsole&lt;/code&gt;等&lt;/p&gt;
+&lt;h3 id=&#34;sql慢查询处理方法&#34;&gt;sql慢查询处理方法&lt;/h3&gt;
+&lt;p&gt;首先如何判别系统遇到了sql慢查询问题？从以下几个方面考虑：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;数据库CPU负载过高，一般是查询语句中有很多计算逻辑，导致数据库cpu负载过高&lt;/li&gt;
+&lt;li&gt;IO负载高导致服务器卡住，这个一般和全表查询 没有索引 有关系&lt;/li&gt;
+&lt;li&gt;查询语句正常，索引正常但是确实慢。如果表的索引是正常的，但是查询慢，这时候需要看看是否 索引没有生效（explain一下）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果出现了上述问题，解决办法：&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;开启sql慢查询的日志&lt;/em&gt;，要开启日志，需要在mysql的配置文件my.cnf的 &lt;code&gt;[mysqld]&lt;/code&gt; 项下配置慢查询日志开启，如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mysqld&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;slow_query_log&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;slow_query_log_file&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;var&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mysql&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;slow&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;queries&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;log&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;long_query_time&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;索引失效的情况&#34;&gt;索引失效的情况&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;如果查询条件中 &lt;code&gt;or&lt;/code&gt;，即使其中有条件带索引也不会使用（这也是为什么尽量少用or的原因）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/604ed82e5aedab222c69d8a1.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;u&gt;注意：要想使用or，又想要让索引生效，只能将or条件中的每个列都加上索引&lt;/u&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对于多列索引，不是使用的第一部分（第一个），则不会使用索引（参考：&lt;a href=&#34;https://www.jianshu.com/p/c964a5e04adb&#34;&gt;你不知道的mysql多列索引的建立和优化&lt;/a&gt;）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;like&lt;/code&gt; 查询是以 &lt;code&gt;%&lt;/code&gt; 开头的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/604edb7a5aedab222c6bae00.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果列类型是字符串，那一定要在条件中将数据使用引号引用起来，否则不使用索引&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/604edbe55aedab222c6bf1f2.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果mysql估计使用全表扫描要比使用索引快，则不使用索引&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;此外，查看索引的使用情况命令如下：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;show status like &#39;Handler_read%&#39;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;大家可以注意：&lt;/p&gt;
+&lt;p&gt;handler_read_key：这个值越高越好，越高表示使用索引查询到的次数越多&lt;/p&gt;
+&lt;p&gt;handler_read_rnd_next：这个值越高，说明查询低效&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/guoxingege/article/details/51034387&#34;&gt;参考链接&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;为什么要分库分表&#34;&gt;为什么要分库分表&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;首先来说一下为什么要分库分表：数据库出现性能瓶颈，用大白话来说就是数据库快扛不住了。&lt;/p&gt;
+&lt;p&gt;数据库出现性能瓶颈，对外表现有几个方面：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;大量请求阻塞&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在高并发场景下，大量请求都需要操作数据库，导致连接数不够了，请求处于阻塞状态。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;sql 操作变慢&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果数据库中存在一张上亿数据量的表，一条sql没有命中索引会全表扫描，这个查询耗时会非常久&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;存储出现问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;业务量剧增，单库数据量越来越大，给存储造成巨大压力&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;sql 调优往往是解决数据库问题的第一步，往往投入少部分精力就能获得较大的收益。sql调优的主要目的是尽可能地让那些慢sql变快，手段其实也很简单就是让sql执行尽量命中索引。&lt;/p&gt;
+&lt;h4 id=&#34;开启慢sql记录&#34;&gt;开启慢sql记录&lt;/h4&gt;
+&lt;p&gt;如果你使用地是mysql，需要在mysql配置文件中配置几个参数即可。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;n&#34;&gt;slow_query_log&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;on&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;long_query_time&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;slow_query_log_file&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;path&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;to&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;log&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;调优的工具&#34;&gt;调优的工具&lt;/h4&gt;
+&lt;p&gt;常常会用到explain这个命令来查看sql语句的执行计划，通过观察执行结果很容易就知道该sql语句是不是全表扫描，有没有命中索引&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;k&#34;&gt;EXPLAIN&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;cnarea_2019&lt;/span&gt;  &lt;span class=&#34;k&#34;&gt;where&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;`&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;肥东路社区居委会&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/604ef4b05aedab222c7920f2.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;可以看到返回有有一列叫“type”，常见取值有：ALL、index、range、 ref、eq_ref、const、system、NULL（从左到右，性能从差到好）&lt;/p&gt;
+&lt;p&gt;ALL代表这条sql语句全表扫描了，需要优化。一般来说需要达到range级别及以上&lt;/p&gt;
+&lt;h4 id=&#34;表结构优化&#34;&gt;表结构优化&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;以一个场景举例说明：&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;“user”表中有 user_id、nickname 等字段，“order”表中有order_id、user_id等字段，如果想拿到用户昵称怎么办？一般情况是通过 join 关联表操作，在查询订单表时关联查询用户表，从而获取导用户昵称。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;但是随着业务量的增加，订单表和用户表肯定也是暴增，这时候通过两个表关联数据就比较费力了，为了取一个昵称字段而不得不关联查询几十上百万的用户表，其速度可想而知！&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这个时候可以尝试将nickname这个字段加到order表中（order_id、user_id、nickname），这种做法通常叫做数据库表冗余字段。这样做的好处是展示订单列表时不需要再关联查询用户表了&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;冗余字段的做法也有一个弊端，如果这个字段更新会同时涉及到多个表的更新，因此在选择冗余字段时要尽量选择不经常更新的字段。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;架构优化&#34;&gt;架构优化&lt;/h4&gt;
+&lt;p&gt;当单台数据库实例扛不住，我们可以增加实例组成集群对外服务&lt;/p&gt;
+&lt;p&gt;当发现读请求明显多于写请求时，我们可以让 主实例负责写，从实例 对外提供读的能力&lt;/p&gt;
+&lt;p&gt;如果读实例压力依然很大，可以在数据库前面加入缓存如redis，让请求优先从缓存取数据减少数据库访问&lt;/p&gt;
+&lt;p&gt;缓存分担了部分压力后，数据库依然是瓶颈时，这个时候就可以考虑分库分表的方案了。后面会详细介绍&lt;/p&gt;
+&lt;h4 id=&#34;硬件优化&#34;&gt;硬件优化&lt;/h4&gt;
+&lt;p&gt;硬件成本非常高，一般来说不可能遇到数据库性能瓶颈问题就去升级硬件&lt;/p&gt;
+&lt;p&gt;在前期业务量比较小的时候，升级硬件数据库性能可以得到比较大的提升，但是在后期，升级硬件得到的性能提升就不那么明显了&lt;/p&gt;
+&lt;h4 id=&#34;分库分表详解&#34;&gt;分库分表详解&lt;/h4&gt;
+&lt;h5 id=&#34;分库&#34;&gt;分库&lt;/h5&gt;
+&lt;p&gt;下面我们以一个商城系统为例逐步说明数据库是如何一步一步演进&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;单应用数据库&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在早期创业阶段想做一个商城系统，基本就是一个系统包含多个基础功能模块，最后打包成一个war包部署，这就是典型的单体架构应用。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/604ef8a85aedab222c7af4fb.jpg&#34; alt=&#34;商城项目使用单数据库&#34;&gt;&lt;/p&gt;
+&lt;p&gt;如上图，商城系统包括主页Portal模块，用户模块，订单模块，库存模块等，所有的模块都共有一个数据库，通常数据库中有非常多的表。&lt;/p&gt;
+&lt;p&gt;因为用户量不大，这样的架构在早期完全适用。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;多应用但数据库&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在前期为了抢占市场，这一套系统就不停的迭代更新，代码量越来越大，架构也变得越来越臃肿，现在随着系统访问压力逐渐增加，系统拆分就势在必行了。&lt;/p&gt;
+&lt;p&gt;为了保证业务平滑，系统架构的重构也是分了几个阶段进行。&lt;/p&gt;
+&lt;p&gt;第一个阶段将商城系统单体架构按照功能模块拆分为子服务，比如：Portal服务、用户服务、订单服务、库存服务等。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/604efa1c5aedab222c7ba5f6.jpg&#34; alt=&#34;多应用单数据库&#34;&gt;&lt;/p&gt;
+&lt;p&gt;如上图，多个服务共享一个数据库，这样做的目的是底层数据库访问逻辑可以不用动，将影响降到最低。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;多应用多数据库&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;随着业务推广力度加大，数据库终于成为了瓶颈，这个时候多个服务共享一个数据库基本不可行了。我们需要将每个服务相关的表拆分出来单独建立一个数据库，这其实就是“分库”了。&lt;/p&gt;
+&lt;p&gt;单数据库能够支撑的并发量是有限的，拆分成多个库可以使服务间不用竞争，提升服务的性能。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/604efb015aedab222c7c1224.jpg&#34; alt=&#34;多应用多数据库&#34;&gt;&lt;/p&gt;
+&lt;p&gt;如上图，从一个大的数据库中分出多个小的数据库，每个服务都对应一个数据库，这就是系统发展到一定阶段必须要做的“分库”操作&lt;/p&gt;
+&lt;p&gt;现在非常火的微服务架构也是一样的，如果只拆分应用不拆分数据库，不能解决根本问题，整个系统也很容易达到瓶颈。&lt;/p&gt;
+&lt;h5 id=&#34;分表&#34;&gt;分表&lt;/h5&gt;
+&lt;p&gt;说完了分库，那什么时候分表呢？&lt;/p&gt;
+&lt;p&gt;如果系统处于高速发展阶段，拿商城系统来说，一天下单量可能几十万，那数据库中的订单表增长就特别快，增长到一定阶段数据库查询效率就会出现明显下降。&lt;/p&gt;
+&lt;p&gt;因此，当单表数据增量过快，业界流传是超过500万的数据量就要考虑分表了。当然500万只是一个经验值，具体根据实际情况来做出决策。&lt;/p&gt;
+&lt;p&gt;那如何分表呢？&lt;/p&gt;
+&lt;p&gt;分表有几个维度，一是*&lt;u&gt;水平切分和垂直切分&lt;/u&gt;*，二是*&lt;u&gt;单库内分表和多库内分表&lt;/u&gt;*&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;水平拆分和垂直拆分&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;就拿用户表（user）来说，表中有7个字段：&lt;code&gt;id,name,age,sex,nickname,description&lt;/code&gt;，如果nickname和description不常用，我们可以将其拆分为另外一张表：用户详细信息表，这样就由一张用户表拆分为了用户基本信息表+用户详细信息表，两张表结构不一样相互独立。但是从这个角度来看垂直拆分并没有从根本上解决单表数据量过大的问题，因此我们还需要做一次水平拆分。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/604efd9e5aedab222c7da9bc.jpg&#34; alt=&#34;拆分表&#34;&gt;&lt;/p&gt;
+&lt;p&gt;还有一种拆分方法，比如表中有一万条数据，我们拆分为两张表，id为奇数的：1，3，5，7.。。。放在user1表中，id为偶数的：2，4，6，8.。。。放在user2中，这样的拆分办法就是水平拆分了。&lt;/p&gt;
+&lt;p&gt;水平拆分的方式很多，除了上面说的按照id拆表，还可以按照时间维度去拆分，比如订单表，可以按照每日，每月等进行拆分。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;每日表：只存储当天的数据&lt;/li&gt;
+&lt;li&gt;每月表：可以起一个定时任务将前一天的数据全部迁移到当月表&lt;/li&gt;
+&lt;li&gt;历史表：同样可以用定时任务把时间超过30天的数据迁移到 history 表&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;总结一下水平拆分和垂直拆分的特点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;垂直拆分：基于表或字段拆分，表结构不同&lt;/li&gt;
+&lt;li&gt;水平拆分：基于数据拆分，表结构相同，数据不同。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;单库内拆分和多库内拆分&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;拿水平拆分为例，每张表都拆分为了多个子表，多个子表存在于同一数据库中。比如下面用户表拆分为用户表1和用户表2.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/604effb05aedab222c7f3682.jpg&#34; alt=&#34;单库拆分&#34;&gt;&lt;/p&gt;
+&lt;p&gt;在一个数据库中将一张表拆分为几个子表在一定程度上可以解决单表查询性能的问题，但是也会遇到一个问题：单数据库存储瓶颈。&lt;/p&gt;
+&lt;p&gt;所以在业界用的更多的还是将子表拆分到多个数据库中。比如下图中，用户表拆分为两个子表，两个子表分别存在于不同的数据库中。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/604f00635aedab222c7fb1d2.jpg&#34; alt=&#34;多库拆分&#34;&gt;&lt;/p&gt;
+&lt;p&gt;一句话总结：分表主要是为了减少单张表的大小，解决单表数据量带来的性能问题。&lt;/p&gt;
+&lt;h5 id=&#34;分库分表带来的复杂性&#34;&gt;分库分表带来的复杂性&lt;/h5&gt;
+&lt;p&gt;既然分库分表这么好，那我们是不是在项目初期就应该采用这种方案呢？不要激动，冷静一下，分库分表的确解决了很多问题，但是也给系统带来了很多复杂性，下面简要地谈一谈。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;（1）跨库关联查询&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在单库未拆分表之前，我们可以很方便的使用 join 操作关联多张表查询数据，但是经过分库分表之后两张表可能都不在一个数据库中，如何使用 join 呢？&lt;/p&gt;
+&lt;p&gt;有几种方案可以解决：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;字段冗余：把需要关联的字段放入主表中，避免join操作；&lt;/li&gt;
+&lt;li&gt;数据抽象：通过 ETL 等将数据汇合聚集，生成新的表；&lt;/li&gt;
+&lt;li&gt;全局表：比如一些基础表可以在每个数据库中都放一份；&lt;/li&gt;
+&lt;li&gt;应用层组装：将基础数据查出来，通过应用程序计算组装。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;（2）分布式事物&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;单数据库可以用本地事务搞定，使用多数据库就只能通过分布式事物解决了。&lt;/p&gt;
+&lt;p&gt;常用的解决方案有：基于可靠消息（MQ）的解决方案、两阶段事物提交、柔性事物等。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;（3）排序、分页、函数计算问题&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在使用sql的 order by，limit等关键字需要特殊处理，一般来说采用分片的思路：&lt;/p&gt;
+&lt;p&gt;先在每个分片上执行相应的函数，然后将各个分片的结果集进行汇总和再次计算，最终得到结果。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;（4）分布式ID&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;如果使用mysql数据库在单库单表里面可以使用id自增作为主键，分库分表了之后就不行了，会&lt;mark&gt;出现id重复&lt;/mark&gt;。&lt;/p&gt;
+&lt;p&gt;常用的分布式ID解决方案有：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;uuid&lt;/li&gt;
+&lt;li&gt;基于数据库自增单独维护一张 ID 表&lt;/li&gt;
+&lt;li&gt;号段模式&lt;/li&gt;
+&lt;li&gt;Redis缓存&lt;/li&gt;
+&lt;li&gt;雪花算法（SnowFlake）&lt;/li&gt;
+&lt;li&gt;百度 uid-generator&lt;/li&gt;
+&lt;li&gt;美团 Leaf&lt;/li&gt;
+&lt;li&gt;滴滴 Tinyid&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;（5）多数据源&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;分库分表之后可能会面临从 多个数据库或多个子表中获取数据，一般的解决思路有：客户端适配和代理层适配。&lt;/p&gt;
+&lt;p&gt;业界常用的中间件有：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;shardingsphere（前身 sharding-jdbc）&lt;/li&gt;
+&lt;li&gt;Mycat&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;redis&#34;&gt;Redis&lt;/h2&gt;
+&lt;h3 id=&#34;redis-的淘汰策略&#34;&gt;Redis 的淘汰策略&lt;/h3&gt;
+&lt;p&gt;将redis作为缓存使用时，当redis内存超出物理内存限制时，内存数据就会与磁盘产生频繁交换，导致redis性能急剧下降。此时如何淘汰无用数据释放空间，就很重要了。&lt;/p&gt;
+&lt;p&gt;redis在生产环境中，采用配置参数 &lt;code&gt;maxmemory&lt;/code&gt; 的方式来限制内存大小，当实际内存超出这个值时，通过以下几种方式淘汰：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;volatile-lru&lt;/code&gt;：从设置过期时间的数据集(server.db[i].expires)中挑选出最近最少使用的数据淘汰。没有设置过期时间的key不会被淘汰，这样就可以在增加内存空间的同时保证需要持久化的数据不会丢失。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;volatile-ttl&lt;/code&gt;：除了淘汰机制采用LRU，策略基本上与volatile-lru相似，从设置过期时间的数据集(server.db[i].expires)中挑选将要过期的数据淘汰，ttl值越大越优先被淘汰。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;volatile-random&lt;/code&gt;：从已设置过期时间的数据集(server.db[i].expires)中任意选择数据淘汰。当内存达到限制无法写入非过期时间的数据集时，可以通过该淘汰策略在主键空间中随机移除某个key。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;allkeys-lru&lt;/code&gt;：从数据集(server.db[i].dict)中挑选最近最少使用的数据淘汰，该策略要淘汰的key面向的是全体key集合，而非过期的key集合。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;allkeys-random&lt;/code&gt;：从数据集(server.db[i].dict)中选择任意数据淘汰。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;no-enviction&lt;/code&gt;：禁止驱逐数据，也就是当内存不足以容纳新入数据时，新写入操作就会报错，请求可以继续进行，线上任务也不能持续进行，采用no-enviction策略可以保证数据不被丢失，这也是系统默认的一种淘汰策略。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;上述是Redis的6种淘汰策略，关于使用这6种策略，开发者还需要根据自身系统特征，正确选择或修改驱逐。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在Redis中，数据有一部分访问频率较高，其余部分访问频率较低，或者无法预测数据的使用频率时，设置allkeys-lru是比较合适的。&lt;/li&gt;
+&lt;li&gt;如果所有数据访问概率大致相等时，可以选择allkeys-random。&lt;/li&gt;
+&lt;li&gt;如果研发者需要通过设置不同的ttl来判断数据过期的先后顺序，此时可以选择volatile-ttl策略。&lt;/li&gt;
+&lt;li&gt;如果希望一些数据能长期被保存，而一些数据可以被淘汰掉时，选择volatile-lru或volatile-random都是比较不错的。&lt;/li&gt;
+&lt;li&gt;由于设置expire会消耗额外的内存，如果计划避免Redis内存在此项上的浪费，可以选用allkeys-lru 策略，这样就可以不再设置过期时间，高效利用内存了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;如何保证缓存数据一致&#34;&gt;如何保证缓存数据一致&lt;/h3&gt;
+&lt;p&gt;只要使用到缓存，无论是本地内存做缓存还是使用 redis 做缓存，那么就会存在数据同步的问题，因为配置信息缓存在内存中，而内存时无法感知到数据在数据库的修改。这样就会造成数据库中的数据与缓存中数据不一致的问题。接下来就讨论一下关于保证缓存和数据库双写时的数据一致性。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;解决方案&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;那么我们这里列出来所有策略，并且讨论他们优劣性。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;先更新数据库，后更新缓存&lt;/li&gt;
+&lt;li&gt;先更新数据库，后删除缓存&lt;/li&gt;
+&lt;li&gt;先更新缓存，后更新数据库&lt;/li&gt;
+&lt;li&gt;先删除缓存，后更新数据库（个人建议这种，利用延时删除的策略）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;先更新数据库，后删除缓存&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;此时解决方案就是利用消息队列进行删除的补偿。具体的业务逻辑用语言描述如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;请求 A 先对数据库进行更新操作&lt;/li&gt;
+&lt;li&gt;在对 Redis 进行删除操作的时候发现报错，删除失败&lt;/li&gt;
+&lt;li&gt;此时将Redis 的 key 作为消息体发送到消息队列中&lt;/li&gt;
+&lt;li&gt;系统接收到消息队列发送的消息后再次对 Redis 进行删除操作&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;但是这个方案会有一个缺点就是会对业务代码造成大量的侵入，深深的耦合在一起，所以这时会有一个优化的方案，我们知道对 Mysql 数据库更新操作后再 binlog 日志中我们都能够找到相应的操作，那么我们可以订阅 Mysql 数据库的 binlog 日志对缓存进行操作。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/162403379&#34;&gt;参考链接&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;zookeeper&#34;&gt;Zookeeper&lt;/h2&gt;
+&lt;p&gt;Zookeeper是一个开源的分布式协调服务，它的目标是可以提供高性能、高可用和顺序访问控制的能力，同时也是为了解决&lt;em&gt;分布式环境下数据一致性&lt;/em&gt;的问题。&lt;/p&gt;
+&lt;h3 id=&#34;集群&#34;&gt;集群&lt;/h3&gt;
+&lt;p&gt;首先，Zookeeper集群中有几个关键的概念，Leader、Follower和Observer，Zookeeper中通常只有Leader节点可以写入，Follower和Observer都只是负责&lt;strong&gt;读&lt;/strong&gt;，但是Follower会参与节点的选举和&lt;strong&gt;过半写成功&lt;/strong&gt;，Observer则不会，它只是单纯的提供读取数据的功能。&lt;/p&gt;
+&lt;p&gt;通常这样设置的话，是为了避免太多的节点参与过半写的过程，导致影响性能，这样Zookeeper只要使用一个几台机器的小集群就可以实现高性能了，如果要横向扩展的话，只需要增加Observer节点即可。&lt;/p&gt;
+&lt;p&gt;Zookeeper建议集群节点个数为奇数，只要超过一般的机器能够正常提供服务，那么整个集群都是可用的状态。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/604f06075aedab222c8353e7.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;数据节点znode&#34;&gt;数据节点Znode&lt;/h3&gt;
+&lt;p&gt;Zookeeper中数据存储于内存之中，这个数据节点就叫做Znode，它是一个树形结构，比如/a/b/c类似。&lt;/p&gt;
+&lt;p&gt;而Znode又分为持久节点、临时节点、顺序节点三大类。&lt;/p&gt;
+&lt;p&gt;持久节点是指只要被创建，除非主动移除，否则都应该一直保持在Zookeeper中。&lt;/p&gt;
+&lt;p&gt;临时节点不同的是，它的声明周期和客户端Session会话一样，会话失效，那么临时节点就会被移除。&lt;/p&gt;
+&lt;p&gt;还有就是临时顺序节点和持久顺序节点，除了基本的特性之外，子节点的名称还是有有序性。&lt;/p&gt;
+&lt;h3 id=&#34;会话session&#34;&gt;会话Session&lt;/h3&gt;
+&lt;p&gt;会话自然就是指Zookeeper客户端和服务端之间的通信，它们使用TCP长连接的方式保持通信，通常，肯定会有心跳检测的机制，同时它可以接受来自服务器的watch事件通知。&lt;/p&gt;
+&lt;h3 id=&#34;事件监听器watcher&#34;&gt;事件监听器Watcher&lt;/h3&gt;
+&lt;p&gt;用户可以在指定的节点上注册watcher，这样在事件触发的时候，客户端就会收到来自服务端的通知。&lt;/p&gt;
+&lt;h3 id=&#34;权限控制-acl&#34;&gt;权限控制 ACL&lt;/h3&gt;
+&lt;p&gt;Zookeeper使用 acl 来进行权限的控制，包含以下五种：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;create，创建子节点权限&lt;/li&gt;
+&lt;li&gt;delete，删除子节点权限&lt;/li&gt;
+&lt;li&gt;read，获取节点数据和子节点列表权限&lt;/li&gt;
+&lt;li&gt;write，更新节点权限&lt;/li&gt;
+&lt;li&gt;admin，设置节点 ACL 权限&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;所以，Zookeeper通过集群的方式来做到高可用，通过内存数据节点Znode来达到高性能，但是存储的数据量不能太大，通常使用于读多写少的场景。&lt;/p&gt;
+&lt;h3 id=&#34;zookeeper有哪些应用场景&#34;&gt;Zookeeper有哪些应用场景&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;命名服务Name Service，依赖Zookeeper可以生成全局唯一的节点id，来对分布式系统中的资源进行管理。&lt;/li&gt;
+&lt;li&gt;分布式协调，这是Zookeeper的核使用了。利用watcher的监听机制，一个系统的某个节点状态发生改变，另外系统可以得到通知。&lt;/li&gt;
+&lt;li&gt;集群管理，分布式集群中状态的监控和管理，使用Zookeeper来存储。&lt;/li&gt;
+&lt;li&gt;Master选举，利用Zookeeper节点的全局唯一性，同时只有一个客户端能够创建成功的特点，可以作为Master选举使用，创建成功的则作为Master。&lt;/li&gt;
+&lt;li&gt;分布式锁，利用Zookeeper创建临时顺序节点的特性。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;说说watcher监听机制和它的原理&#34;&gt;说说watcher监听机制和它的原理？&lt;/h3&gt;
+&lt;p&gt;Zookeeper可以提供分布式数据的发布/订阅功能，依赖的就是watcher监听机制。&lt;/p&gt;
+&lt;p&gt;客户端可以向服务端注册watcher监听，服务端的指定事件触发之后，就会向客户端发送一个事件通知。&lt;/p&gt;
+&lt;p&gt;它有几个特性：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;一次性，一旦一个watcher触发之后，Zookeeper就会将它从存储中移除。&lt;/li&gt;
+&lt;li&gt;客户端串行，客户端的watcher回调处理是串行同步的过程，不要因为一个watcher的逻辑阻塞整个客户端。&lt;/li&gt;
+&lt;li&gt;轻量，watcher通知的单位是watchedEvent，只包含通知状态、事件类型和节点类型，不包含具体的事件内容，具体的事件内容需要客户端主动去重新获取数据。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;主要流程如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;客户端向服务端注册watcher监听&lt;/li&gt;
+&lt;li&gt;保存watcher对象到客户端本地的watcherManager中&lt;/li&gt;
+&lt;li&gt;服务端watcher事件触发后，客户端收到服务端通知，从watcherManager中取出对应的watcher对象执行回调逻辑。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/604f0c1b5aedab222c87c7fd.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;zookeeper是如何保证数据一致性的&#34;&gt;Zookeeper是如何保证数据一致性的&lt;/h3&gt;
+&lt;p&gt;Zookeeper通过ZAB原子广播协议来实现数据的最终顺序一致性，他是一个类似2PC两阶段提交的过程。&lt;/p&gt;
+&lt;p&gt;由于Zookeeper只有Leader节点可以写入数据，如果是其他节点收到写入数据的请求，则会将之转发给Leader节点。&lt;/p&gt;
+&lt;p&gt;主要流程如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Leader收到请求之后，将它转换为一个proposal提议，并且为每个提议分配一个全局唯一递增的事务ID：zxid，然后把提议放入到一个FIFO的队列中，按照FIFO的策略发送给所有的Follower&lt;/li&gt;
+&lt;li&gt;Follower收到提议之后，以事务日志的形式写入到本地磁盘中，写入成功后返回ACK给Leader&lt;/li&gt;
+&lt;li&gt;Leader在收到超过半数的Follower的ACK之后，即可认为数据写入成功，就会发送commit命令给Follower告诉他们可以提交proposal了&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/604f0c9d5aedab222c881bce.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;ZAB包含两种基本模式，崩溃恢复和消息广播。&lt;/p&gt;
+&lt;p&gt;整个集群服务在启动、网络中断或者重启等异常情况的时候，首先会进入到崩溃恢复状态，此时会通过选举产生Leader节点，当集群过半的节点都和Leader状态同步之后，ZAB就会退出恢复模式。之后，就会进入消息广播的模式。&lt;/p&gt;
+&lt;h3 id=&#34;zookeeper如何进行leader选举的&#34;&gt;Zookeeper如何进行Leader选举的？&lt;/h3&gt;
+&lt;p&gt;Leader的选举可以分为两个方面，同时选举主要包含事务zxid和myid，节点主要包含LEADING\FOLLOWING\LOOKING3个状态。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;服务启动期间的选举&lt;/li&gt;
+&lt;li&gt;服务运行期间的选举&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;服务启动期间的选举&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;首先，每个节点都会对自己进行投票，然后把投票信息广播给集群中的其他节点&lt;/li&gt;
+&lt;li&gt;节点接收到其他节点的投票信息，然后和自己的投票进行比较，首先zxid较大的优先，如果zxid相同那么则会去选择myid更大者，此时大家都是LOOKING的状态&lt;/li&gt;
+&lt;li&gt;投票完成之后，开始统计投票信息，如果集群中过半的机器都选择了某个节点机器作为leader，那么选举结束&lt;/li&gt;
+&lt;li&gt;最后，更新各个节点的状态，leader改为LEADING状态，follower改为FOLLOWING状态&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;服务运行期间的选举&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;如果开始选举出来的leader节点宕机了，那么运行期间就会重新进行leader的选举。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;leader宕机之后，非observer节点都会把自己的状态修改为LOOKING状态，然后重新进入选举流程&lt;/li&gt;
+&lt;li&gt;生成投票信息(myid,zxid)，同样，第一轮的投票大家都会把票投给自己，然后把投票信息广播出去&lt;/li&gt;
+&lt;li&gt;接下来的流程和上面的选举是一样的，都会优先以zxid，然后选择myid，最后统计投票信息，修改节点状态，选举结束&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;那选举之后又是怎样进行数据同步的&#34;&gt;那选举之后又是怎样进行数据同步的？&lt;/h3&gt;
+&lt;p&gt;那实际上Zookeeper在选举之后，Follower和Observer（统称为Learner）就会去向Leader注册，然后就会开始数据同步的过程。&lt;/p&gt;
+&lt;p&gt;数据同步包含3个主要值和4种形式。&lt;/p&gt;
+&lt;p&gt;PeerLastZxid：Learner服务器最后处理的ZXID&lt;/p&gt;
+&lt;p&gt;minCommittedLog：Leader提议缓存队列中最小ZXID&lt;/p&gt;
+&lt;p&gt;maxCommittedLog：Leader提议缓存队列中最大ZXID&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;直接差异化同步 DIFF同步&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;如果PeerLastZxid在minCommittedLog和maxCommittedLog之间，那么则说明Learner服务器还没有完全同步最新的数据。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;首先Leader向Learner发送DIFF指令，代表开始差异化同步，然后把差异数据（从PeerLastZxid到maxCommittedLog之间的数据）提议proposal发送给Learner&lt;/li&gt;
+&lt;li&gt;发送完成之后发送一个NEWLEADER命令给Learner，同时Learner返回ACK表示已经完成了同步&lt;/li&gt;
+&lt;li&gt;接着等待集群中过半的Learner响应了ACK之后，就发送一个UPTODATE命令，Learner返回ACK，同步流程结束&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/604f0d515aedab222c888e46.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;先回滚再差异化同步 TRUNC+DIFF同步&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这个设置针对的是一个异常的场景。&lt;/p&gt;
+&lt;p&gt;如果Leader刚生成一个proposal，还没有来得及发送出去，此时Leader宕机，重新选举之后作为Follower，但是新的Leader没有这个proposal数据。&lt;/p&gt;
+&lt;p&gt;举个栗子：&lt;/p&gt;
+&lt;p&gt;假设现在的Leader是A，minCommittedLog=1，maxCommittedLog=3，刚好生成的一个proposal的ZXID=4，然后挂了。&lt;/p&gt;
+&lt;p&gt;重新选举出来的Leader是B，B之后又处理了2个提议，然后minCommittedLog=1，maxCommittedLog=5。&lt;/p&gt;
+&lt;p&gt;这时候A的PeerLastZxid=4，在(1,5)之间。&lt;/p&gt;
+&lt;p&gt;那么这一条只存在于A的提议怎么处理？&lt;/p&gt;
+&lt;p&gt;A要进行事务回滚，相当于抛弃这条数据，并且回滚到最接近于PeerLastZxid的事务，对于A来说，也就是PeerLastZxid=3。&lt;/p&gt;
+&lt;p&gt;流程和DIFF一致，只是会先发送一个TRUNC命令，然后再执行差异化DIFF同步。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;仅回滚同步 TRUNC同步&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;针对PeerLastZxid大于maxCommittedLog的场景，流程和上述一致，事务将会被回滚到maxCommittedLog的记录。&lt;/p&gt;
+&lt;p&gt;这个其实就更简单了，也就是你可以认为TRUNC+DIFF中的例子，新的Leader B没有处理提议，所以B中minCommittedLog=1，maxCommittedLog=3。&lt;/p&gt;
+&lt;p&gt;所以A的PeerLastZxid=4就会大于maxCommittedLog了，也就是A只需要回滚就行了，不需要执行差异化同步DIFF了。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;全量同步 SNAP同步&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;适用于两个场景：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;PeerLastZxid小于minCommittedLog&lt;/li&gt;
+&lt;li&gt;Leader服务器上没有提议缓存队列，并且PeerLastZxid不等于Leader的最大ZXID&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这两种场景下，Leader将会发送SNAP命令，把全量的数据都发送给Learner进行同步。&lt;/p&gt;
+&lt;h3 id=&#34;有可能会出现数据不一致的问题吗&#34;&gt;有可能会出现数据不一致的问题吗？&lt;/h3&gt;
+&lt;p&gt;还是会存在的，我们可以分成3个场景来描述这个问题。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;查询不一致&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;因为Zookeeper是过半成功即代表成功，假设我们有5个节点，如果123节点写入成功，如果这时候请求访问到4或者5节点，那么有可能读取不到数据，因为可能数据还没有同步到4、5节点中，也可以认为这算是数据不一致的问题。&lt;/p&gt;
+&lt;p&gt;解决方案可以在读取前使用sync命令。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;leader未发送proposal宕机&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这也就是数据同步说过的问题。&lt;/p&gt;
+&lt;p&gt;leader刚生成一个proposal，还没有来得及发送出去，此时leader宕机，重新选举之后作为follower，但是新的leader没有这个proposal。&lt;/p&gt;
+&lt;p&gt;这种场景下的日志将会被丢弃。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;leader发送proposal成功，发送commit前宕机&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;如果发送proposal成功了，但是在将要发送commit命令前宕机了，如果重新进行选举，还是会选择zxid最大的节点作为leader，因此，这个日志并不会被丢弃，会在选举出leader之后重新同步到其他节点当中。&lt;/p&gt;
+&lt;h3 id=&#34;如果作为注册中心zookeeper-和eurekaconsulnacos有什么区别&#34;&gt;如果作为注册中心，Zookeeper 和Eureka、Consul、Nacos有什么区别？&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;&lt;strong&gt;Nacos&lt;/strong&gt;&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;&lt;strong&gt;Eureka&lt;/strong&gt;&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;&lt;strong&gt;Consul&lt;/strong&gt;&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;&lt;strong&gt;Zookeeper&lt;/strong&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;一致性协议&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;CP+AP&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;AP&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;CP&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;CP&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;健康检查&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;TCP/HTTP/MYSQL/Client Beat&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Client Beat&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;TCP/HTTP/gRPC/Cmd&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Keep Alive&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;负载均衡策略&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;权重/ metadata/Selector&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Ribbon&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Fabio&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;—&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;雪崩保护&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;有&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;有&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;无&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;无&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;自动注销实例&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;支持&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;支持&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;不支持&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;支持&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;访问协议&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;HTTP/DNS&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;HTTP&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;HTTP/DNS&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;TCP&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;监听支持&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;支持&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;支持&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;支持&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;支持&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;多数据中心&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;支持&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;支持&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;支持&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;不支持&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;跨注册中心同步&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;支持&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;不支持&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;支持&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;不支持&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;SpringCloud集成&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;支持&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;支持&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;支持&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;不支持&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Dubbo集成&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;支持&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;不支持&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;不支持&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;支持&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;K8S集成&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;支持&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;不支持&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;支持&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;不支持&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;最后你对于cap理论怎么理解&#34;&gt;最后，你对于CAP理论怎么理解？&lt;/h3&gt;
+&lt;p&gt;CAP是一个分布式系统设计的定理，他包含3个部分，并且最多只能同时满足其中两个。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Consistency一致性，因为在一个分布式系统中，数据肯定需要在不同的节点之间进行同步，就比如Zookeeper，所以一致性就是指的是数据在不同的节点之间怎样保证一致性，对于纯理论的C而言，默认的规则是忽略掉延迟的，因为如果考虑延迟的话，因为数据同步的过程无论如何都会有延迟的，延迟的过程必然会带来数据的不一致。&lt;/li&gt;
+&lt;li&gt;Availability可用性，这个指的是对于每一个请求，节点总是可以在合理的时间返回合理的响应，比如Zookeeper在进行数据同步时，无法对外提供读写服务，不满足可用性要求。这里常有的一个例子是说Zookeeper选举期间无法提供服务不满足A，这个说法并不准确，因为CAP关注的是数据的读写，选举可以认为不在考虑范围之内。所以，可以认为对于数据的读写，无论响应超时还是返回异常都可以认为是不满足A。&lt;/li&gt;
+&lt;li&gt;Partition-tolerance分区容错性，因为在一个分布式系统当中，很有可能由于部分节点的网络问题导致整个集群之间的网络不连通，所以就产生了网络分区，整个集群的环境被分隔成不同的的子网，所以，一般说网络不可能100%的不产生问题，所以P一定会存在。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;为什么只能同时满足CAP中的两个呢？&lt;/p&gt;
+&lt;p&gt;以A\B两个节点同步数据举例，由于P的存在，那么可能AB同步数据出现问题。&lt;/p&gt;
+&lt;p&gt;如果选择AP，由于A的数据未能正确同步到B，所以AB数据不一致，无法满足C。&lt;/p&gt;
+&lt;p&gt;如果选择CP，那么B就不能提供服务，就无法满足A。&lt;/p&gt;
+</description>
+                
+                
+                
+                
+                
+                    
+                        
+                            
+                                
+                                
+                                
+                                    <category domain="https://my-hugo-blog-latin-xiao-mao.vercel.app/categories/%E7%BC%96%E7%A8%8B/">编程</category>
+                                
+                            
+                        
+                    
+                        
+                            
+                                
+                                
+                                
+                                    <category domain="https://my-hugo-blog-latin-xiao-mao.vercel.app/tags/java/">Java</category>
+                                
+                            
+                                
+                                
+                                
+                                    <category domain="https://my-hugo-blog-latin-xiao-mao.vercel.app/tags/%E9%9D%A2%E8%AF%95/">面试</category>
+                                
+                            
+                        
+                    
+                
+            </item>
+        
+            <item>
+                <title>代码实现批量重命名图片</title>
+                <link>https://my-hugo-blog-latin-xiao-mao.vercel.app/%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%E6%89%B9%E9%87%8F%E9%87%8D%E5%91%BD%E5%90%8D%E5%9B%BE%E7%89%87/</link>
+                <guid isPermaLink="true">https://my-hugo-blog-latin-xiao-mao.vercel.app/%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%E6%89%B9%E9%87%8F%E9%87%8D%E5%91%BD%E5%90%8D%E5%9B%BE%E7%89%87/</guid>
                 <pubDate>Sat, 13 Mar 2021 11:00:27 &#43;0800</pubDate>
                 
                     <author>reuixiy@gmail.com (古月轩039)</author>
                 
                 <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
                 
-                    <description>&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+                    <description>&lt;blockquote&gt;
+&lt;p&gt;首先我们来看&lt;code&gt;Python&lt;/code&gt;版本的实现：&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
@@ -126,6 +1525,111 @@
     &lt;span class=&#34;n&#34;&gt;newName&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;rename&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
+&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;首先我们来看&lt;code&gt;Java&lt;/code&gt;版本的实现：&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;kn&#34;&gt;package&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;tool&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;java.io.File&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;java.text.SimpleDateFormat&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;java.util.Date&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;cm&#34;&gt;/**
+&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt; * 批量修改图片名字
+&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt; */&lt;/span&gt;
+&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;BatchRename&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+
+    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[]&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;args&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;BatchRename&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;rename&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+    &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+
+    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;rename&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;c1&#34;&gt;//输入的目录路径
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;n&#34;&gt;String&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;_path&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;E:\\photos\\网图&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+        &lt;span class=&#34;c1&#34;&gt;//将要实现的转换格式
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;n&#34;&gt;String&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;targetSuffix&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;.png&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+        &lt;span class=&#34;c1&#34;&gt;//目标文件夹路径
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;n&#34;&gt;File&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;file&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;File&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;_path&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+        &lt;span class=&#34;c1&#34;&gt;//如果目录存在
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;file&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;exists&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;file&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;isDirectory&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;())&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;c1&#34;&gt;//获取目标目录下所有的文件数组
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;            &lt;span class=&#34;n&#34;&gt;File&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[]&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;files&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;file&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;listFiles&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+            &lt;span class=&#34;c1&#34;&gt;//标记该数组的长度
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;            &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;len&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;files&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;length&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+            &lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;file&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;目录下总共有：&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;len&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;个文件&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+            &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;++)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+                &lt;span class=&#34;n&#34;&gt;String&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;name&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;files&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;].&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getName&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+                &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;index&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;lastIndexOf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;.&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+                &lt;span class=&#34;c1&#34;&gt;//获取后缀名
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;                &lt;span class=&#34;n&#34;&gt;String&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;suffixName&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;substring&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;index&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+                &lt;span class=&#34;c1&#34;&gt;//通过后缀名判断图片
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;                &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;.jpg&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;equals&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;suffixName&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;.png&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;equals&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;suffixName&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;.webp&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;equals&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;suffixName&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)){&lt;/span&gt;
+                    &lt;span class=&#34;n&#34;&gt;String&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;newName&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SimpleDateFormat&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;yyyyMMddhhmmss&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;format&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Date&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;())&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;targetSuffix&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+                    &lt;span class=&#34;c1&#34;&gt;//重命名
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;                    &lt;span class=&#34;n&#34;&gt;File&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;dest&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;File&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;_path&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;/&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;newName&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+                    &lt;span class=&#34;n&#34;&gt;files&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;].&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;renameTo&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dest&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+                    &lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;_path&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;\\&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;name&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34; 重命名为：&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;dest&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getName&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;成功&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+                &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;_path&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;\\&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;name&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34; 文件不是一个图片文件&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+
+            &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+        &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+    &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
 &lt;/div&gt;</description>
                 
                 
@@ -149,6 +1653,12 @@
                                 
                                 
                                     <category domain="https://my-hugo-blog-latin-xiao-mao.vercel.app/tags/python/">Python</category>
+                                
+                            
+                                
+                                
+                                
+                                    <category domain="https://my-hugo-blog-latin-xiao-mao.vercel.app/tags/java/">Java</category>
                                 
                             
                         
@@ -1369,76 +2879,76 @@
 &lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/604b8ad45aedab222ced4718.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;爱你&#34;&gt;爱你&lt;/h2&gt;
 &lt;p&gt;&lt;s&gt;最近看了一些之前的短视频，赶紧挺扎心的啊&lt;/s&gt;&lt;/p&gt;
-&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=285994291&amp;bvid=BV1Nf4y1m7P1&amp;cid=200063896&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=86 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=285994291&amp;bvid=BV1Nf4y1m7P1&amp;cid=200063896&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=400 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
 ---
-&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=328410183&amp;bvid=BV1wA411B7bP&amp;cid=200063662&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=86 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=328410183&amp;bvid=BV1wA411B7bP&amp;cid=200063662&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=400 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
 ---
-&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=753477374&amp;bvid=BV1Vk4y1z7g2&amp;cid=200065416&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=86 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=753477374&amp;bvid=BV1Vk4y1z7g2&amp;cid=200065416&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=400 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
 ---
-&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=370999894&amp;bvid=BV1nZ4y1H7LU&amp;cid=200063280&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=86 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=370999894&amp;bvid=BV1nZ4y1H7LU&amp;cid=200063280&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=400 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
 ---
-&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=753409423&amp;bvid=BV1Dk4y1B7UE&amp;cid=200064049&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=86 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=753409423&amp;bvid=BV1Dk4y1B7UE&amp;cid=200064049&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=400 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
 ---
-&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=795917713&amp;bvid=BV1TC4y1a7gQ&amp;cid=200071289&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=86 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=795917713&amp;bvid=BV1TC4y1a7gQ&amp;cid=200071289&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=400 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
 ---
 &lt;h2 id=&#34;古文魅力&#34;&gt;古文魅力&lt;/h2&gt;
-&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=625904303&amp;bvid=BV13t4y1y7fd&amp;cid=200071388&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=86 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=625904303&amp;bvid=BV13t4y1y7fd&amp;cid=200071388&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=400 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
 ---
-&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=883457319&amp;bvid=BV1iK4y1x7bj&amp;cid=200071593&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=86 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=883457319&amp;bvid=BV1iK4y1x7bj&amp;cid=200071593&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=400 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
 ---
-&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=370933647&amp;bvid=BV1bZ4y1W7SG&amp;cid=200071759&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=86 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=370933647&amp;bvid=BV1bZ4y1W7SG&amp;cid=200071759&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=400 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
 ---
-&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=243414237&amp;bvid=BV1Nv41167ph&amp;cid=200071916&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=86 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=243414237&amp;bvid=BV1Nv41167ph&amp;cid=200071916&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=400 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
 ---
-&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=838434268&amp;bvid=BV12g4y1i7qJ&amp;cid=200072125&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=86 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=838434268&amp;bvid=BV12g4y1i7qJ&amp;cid=200072125&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=400 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
 ---
-&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=925955287&amp;bvid=BV1ST4y1E7Xh&amp;cid=200072491&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=86 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=925955287&amp;bvid=BV1ST4y1E7Xh&amp;cid=200072491&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=400 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
 ---
-&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=710888360&amp;bvid=BV1tQ4y1P7QX&amp;cid=200072610&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=86 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=710888360&amp;bvid=BV1tQ4y1P7QX&amp;cid=200072610&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=400 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
 ---
-&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=455953048&amp;bvid=BV1f5411p7yD&amp;cid=200072772&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=86 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=455953048&amp;bvid=BV1f5411p7yD&amp;cid=200072772&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=400 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
 ---
-&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=455942360&amp;bvid=BV1T5411W7bo&amp;cid=200072990&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=86 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=455942360&amp;bvid=BV1T5411W7bo&amp;cid=200072990&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=400 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
 ---
-&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=838420824&amp;bvid=BV1Cg4y1i7EL&amp;cid=200073162&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=86 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=838420824&amp;bvid=BV1Cg4y1i7EL&amp;cid=200073162&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=400 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
 ---
-&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=710974224&amp;bvid=BV1BD4y1D7ou&amp;cid=200073602&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=86 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=710974224&amp;bvid=BV1BD4y1D7ou&amp;cid=200073602&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=400 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
 ---
-&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=285960696&amp;bvid=BV1Rf4y127vA&amp;cid=200073700&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=86 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=285960696&amp;bvid=BV1Rf4y127vA&amp;cid=200073700&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=400 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
 ---
-&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=795918700&amp;bvid=BV1fC4y1h7iH&amp;cid=200073878&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=86 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=795918700&amp;bvid=BV1fC4y1h7iH&amp;cid=200073878&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=400 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
 ---
-&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=200911272&amp;bvid=BV17z411i7r6&amp;cid=200081843&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=86 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=200911272&amp;bvid=BV17z411i7r6&amp;cid=200081843&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=400 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
 ---
-&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=200940750&amp;bvid=BV1xz411i7UJ&amp;cid=200082156&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=86 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=200940750&amp;bvid=BV1xz411i7UJ&amp;cid=200082156&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=400 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
 ---
-&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=795994910&amp;bvid=BV1HC4y1a7P7&amp;cid=200082289&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=86 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=795994910&amp;bvid=BV1HC4y1a7P7&amp;cid=200082289&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=400 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
 ---
-&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=540941982&amp;bvid=BV1Ki4y1x76a&amp;cid=200082413&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=86 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=540941982&amp;bvid=BV1Ki4y1x76a&amp;cid=200082413&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=400 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
 ---
-&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=840894539&amp;bvid=BV1n54y1Q7ed&amp;cid=200082556&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=86 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=840894539&amp;bvid=BV1n54y1Q7ed&amp;cid=200082556&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=400 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
 ---
-&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=200919242&amp;bvid=BV1gz411i7jD&amp;cid=200082726&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=86 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=200919242&amp;bvid=BV1gz411i7jD&amp;cid=200082726&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=400 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
 ---
-&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=370996833&amp;bvid=BV1uZ4y1H7cn&amp;cid=200082861&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=86 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=370996833&amp;bvid=BV1uZ4y1H7cn&amp;cid=200082861&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=400 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
 ---
-&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=625988730&amp;bvid=BV1tt4y1y7fi&amp;cid=200083081&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=86 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=625988730&amp;bvid=BV1tt4y1y7fi&amp;cid=200083081&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=400 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
 ---
-&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=840928246&amp;bvid=BV1h54y1Q7hx&amp;cid=200083182&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=86 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=840928246&amp;bvid=BV1h54y1Q7hx&amp;cid=200083182&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=400 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
 ---
-&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=498497803&amp;bvid=BV1hK411p7HK&amp;cid=200083337&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=86 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=498497803&amp;bvid=BV1hK411p7HK&amp;cid=200083337&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=400 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
 ---
-&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=668462261&amp;bvid=BV1ha4y1v7n5&amp;cid=200083482&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=86 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=668462261&amp;bvid=BV1ha4y1v7n5&amp;cid=200083482&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=400 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
 &lt;h2 id=&#34;点滴&#34;&gt;点滴&lt;/h2&gt;
-&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=370991534&amp;bvid=BV1MZ4y1H7F2&amp;cid=200064685&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=86 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=370991534&amp;bvid=BV1MZ4y1H7F2&amp;cid=200064685&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=400 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
 ---
-&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=455958532&amp;bvid=BV1w5411W7rL&amp;cid=200065586&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=86 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=455958532&amp;bvid=BV1w5411W7rL&amp;cid=200065586&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=400 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
 ---
-&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=883495504&amp;bvid=BV1FK4y147nX&amp;cid=200069477&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=86 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=883495504&amp;bvid=BV1FK4y147nX&amp;cid=200069477&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=400 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
 ---
-&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=413471086&amp;bvid=BV1mV411r7qN&amp;cid=200070486&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=86 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=413471086&amp;bvid=BV1mV411r7qN&amp;cid=200070486&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=400 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
 ---
-&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=838491411&amp;bvid=BV1Pg4y1q7Cn&amp;cid=200070897&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=86 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;iframe src=&#34;https://my-hugo-blog-latin-xiao-mao.vercel.app//player.bilibili.com/player.html?aid=838491411&amp;bvid=BV1Pg4y1q7Cn&amp;cid=200070897&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; width=576 height=400 framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
 &lt;h1 id=&#34;学驾照ing&#34;&gt;学驾照ing&lt;/h1&gt;
 &lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/604b8c715aedab222cee17c8.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/604b8c715aedab222cee17cb.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
@@ -5064,11 +6574,9 @@ Nginx 特点是占有内存少，并发能力强
 &lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/602e3d51343ca1fbf9f192da.png&#34; alt=&#34;https://img.imgdb.cn/item/602e3d51343ca1fbf9f192da.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/602e3e82343ca1fbf9f2068b.png&#34; alt=&#34;https://img.imgdb.cn/item/602e3e82343ca1fbf9f2068b.png&#34;&gt;&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;如果是非静态代码块和非静态成员变量，不执行&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/602e3e82343ca1fbf9f20684.png&#34; alt=&#34;https://img.imgdb.cn/item/602e3e82343ca1fbf9f20684.png&#34;&gt;&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;如果是非静态代码块和非静态成员变量，不执行&lt;/li&gt;
 &lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/602e3e82343ca1fbf9f20684.png&#34; alt=&#34;https://img.imgdb.cn/item/602e3e82343ca1fbf9f20684.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/602e3e82343ca1fbf9f20686.png&#34; alt=&#34;https://img.imgdb.cn/item/602e3e82343ca1fbf9f20686.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;只有在创建 TestOrder 对象的时候，才会执行非静态代码块和非静态成员变量&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/602e3e82343ca1fbf9f20688.png&#34; alt=&#34;https://img.imgdb.cn/item/602e3e82343ca1fbf9f20688.png&#34;&gt;&lt;/p&gt;
