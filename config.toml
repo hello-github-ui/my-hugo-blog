@@ -1332,7 +1332,7 @@ uglyURLs = false
     # 404 页面
 
     # 视频封面
-    fofPoster = "https://img.imgdb.cn/item/604ba06d5aedab222cf8e082.jpg"
+    fofPoster = "https://api.nmb.show/xiaojiejie1.php"
 
     # 视频地址
     fofVideoWebm = "http://sp.jzsc.net/upload/video/2019-11-26/f53fc26d-eb6c-4aca-bd56-dc21ba123d19.mp4"
