@@ -23,35 +23,572 @@
         
             <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
         
-        <lastBuildDate>Wed, 31 Mar 2021 23:06:11 &#43;0800</lastBuildDate>
+        <lastBuildDate>Mon, 05 Apr 2021 11:48:33 &#43;0800</lastBuildDate>
         
             <atom:link rel="self" type="application/rss&#43;xml" href="https://my-hugo-blog-latin-xiao-mao.vercel.app/rss.xml" />
         
         
             <item>
-                <title>Redis主从搭建</title>
-                <link>https://my-hugo-blog-latin-xiao-mao.vercel.app/redis%E4%B8%BB%E4%BB%8E%E6%90%AD%E5%BB%BA/</link>
-                <guid isPermaLink="true">https://my-hugo-blog-latin-xiao-mao.vercel.app/redis%E4%B8%BB%E4%BB%8E%E6%90%AD%E5%BB%BA/</guid>
-                <pubDate>Tue, 30 Mar 2021 23:35:55 &#43;0800</pubDate>
+                <title>分享几个免费在线图片API</title>
+                <link>https://my-hugo-blog-latin-xiao-mao.vercel.app/%E5%88%86%E4%BA%AB%E5%87%A0%E4%B8%AA%E5%85%8D%E8%B4%B9%E5%9C%A8%E7%BA%BF%E5%9B%BE%E7%89%87api/</link>
+                <guid isPermaLink="true">https://my-hugo-blog-latin-xiao-mao.vercel.app/%E5%88%86%E4%BA%AB%E5%87%A0%E4%B8%AA%E5%85%8D%E8%B4%B9%E5%9C%A8%E7%BA%BF%E5%9B%BE%E7%89%87api/</guid>
+                <pubDate>Sun, 04 Apr 2021 16:08:03 &#43;0000</pubDate>
                 
                     <author>reuixiy@gmail.com (古月轩039)</author>
                 
                 <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
                 
-                    <description>&lt;h2 id=&#34;redis主从复制&#34;&gt;Redis主从复制&lt;/h2&gt;
-&lt;p&gt;redis的主从复制概念和mysql的主从复制大概类似。一台主机master，一台从机slaver。master主机数据更新后根据配置和策略，自动同步到slaver从机，Master以写为主，Slaver以读为主。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/60601b8a8322e6675cccfc55.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;主要用途&#34;&gt;主要用途&lt;/h2&gt;
+                    <description>&lt;blockquote&gt;
+&lt;p&gt;在我们写博客的时候，有时候可能会为了找一个封面图纠结好久好久，还很麻烦；不过呢，我相信你使用了下面的这个方法后，就没有这些烦恼了&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这几个api呢，每次刷新，图片都会不一样&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/6069750d8322e6675c55b5a7.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;读写分离：适用于读多写少的应用，增加多个从机，提高读的速度，提高程序的并发性&lt;/li&gt;
-&lt;li&gt;数据容灾恢复：从机复制主机的数据，相当于数据备份，如果主机数据丢失，那么可以通过从机存储的数据进行恢复&lt;/li&gt;
-&lt;li&gt;高并发、高可用集群实现的基础：在高并发的场景下，就算主机挂了，从机可以实现主从切换，从机自动成为主机对外提供服务&lt;/li&gt;
+&lt;li&gt;美女类型的&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;一主多从配置&#34;&gt;一主多从配置&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/60601c408322e6675ccd5f78.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;环境准备&#34;&gt;环境准备&lt;/h2&gt;
-&lt;p&gt;我们用一台机器模拟三个机器，&lt;/p&gt;
-&lt;p&gt;将下载下来的redis复制三份&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://api.nmb.show/xiaojiejie1.php&#34; alt=&#34;&#34;&gt;
+&lt;a href=&#34;https://img.imgdb.cn/item/606a7f958322e6675c3145f9.jpg&#34;&gt;https://img.imgdb.cn/item/606a7f958322e6675c3145f9.jpg&lt;/a&gt;
+&lt;img src=&#34;http://api.nmb.show/xiaojiejie2.php&#34; alt=&#34;&#34;&gt;
+&lt;a href=&#34;https://img.imgdb.cn/item/606a7f958322e6675c3145fc.jpg&#34;&gt;https://img.imgdb.cn/item/606a7f958322e6675c3145fc.jpg&lt;/a&gt;
+&lt;img src=&#34;https://cdn.seovx.com/?mom=302&#34; alt=&#34;&#34;&gt;
+&lt;a href=&#34;https://img.imgdb.cn/item/606a7f958322e6675c314601.jpg&#34;&gt;https://img.imgdb.cn/item/606a7f958322e6675c314601.jpg&lt;/a&gt;
+&lt;img src=&#34;https://api88.net/api/img/rand/&#34; alt=&#34;&#34;&gt;
+&lt;a href=&#34;https://img.imgdb.cn/item/606a7f958322e6675c314608.jpg&#34;&gt;https://img.imgdb.cn/item/606a7f958322e6675c314608.jpg&lt;/a&gt;
+&lt;img src=&#34;api.lyiqk.cn/purelady&#34; alt=&#34;&#34;&gt;
+&lt;a href=&#34;https://img.imgdb.cn/item/606a7f958322e6675c31460d.jpg&#34;&gt;https://img.imgdb.cn/item/606a7f958322e6675c31460d.jpg&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;动漫类型的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://api.nmb.show/1985acg.php&#34; alt=&#34;&#34;&gt;
+&lt;a href=&#34;https://img.imgdb.cn/item/606a7ffe8322e6675c31a516.jpg&#34;&gt;https://img.imgdb.cn/item/606a7ffe8322e6675c31a516.jpg&lt;/a&gt;
+&lt;img src=&#34;https://api.dujin.org/pic/&#34; alt=&#34;&#34;&gt;
+&lt;a href=&#34;https://img.imgdb.cn/item/606a81098322e6675c329774.jpg&#34;&gt;https://img.imgdb.cn/item/606a81098322e6675c329774.jpg&lt;/a&gt;
+&lt;img src=&#34;https://img.xjh.me/random_img.php&#34; alt=&#34;&#34;&gt;
+&lt;a href=&#34;https://img.imgdb.cn/item/606a81458322e6675c32cb8d.jpg&#34;&gt;https://img.imgdb.cn/item/606a81458322e6675c32cb8d.jpg&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;自然风光类型的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;http://yun.fuh.ink:8086/pic.php&#34; alt=&#34;&#34;&gt;
+&lt;a href=&#34;https://img.imgdb.cn/item/606a805a8322e6675c31fa6a.jpg&#34;&gt;https://img.imgdb.cn/item/606a805a8322e6675c31fa6a.jpg&lt;/a&gt;
+&lt;img src=&#34;https://yun.fuh.ink:8087/pic.php&#34; alt=&#34;&#34;&gt;
+&lt;a href=&#34;https://img.imgdb.cn/item/606a805a8322e6675c31fa6e.jpg&#34;&gt;https://img.imgdb.cn/item/606a805a8322e6675c31fa6e.jpg&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;随机类型的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://unsplash.it/1600/900?random&#34; alt=&#34;&#34;&gt;
+&lt;a href=&#34;https://img.imgdb.cn/item/606a81e08322e6675c3361a2.jpg&#34;&gt;https://img.imgdb.cn/item/606a81e08322e6675c3361a2.jpg&lt;/a&gt;
+&lt;img src=&#34;https://api.gejiba.com/100/3109.php&#34; alt=&#34;&#34;&gt;
+&lt;a href=&#34;https://img.imgdb.cn/item/606a81e08322e6675c3361a6.jpg&#34;&gt;https://img.imgdb.cn/item/606a81e08322e6675c3361a6.jpg&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://source.unsplash.com/random&#34; alt=&#34;&#34;&gt;
+&lt;a href=&#34;https://img.imgdb.cn/item/606a81ba8322e6675c333ae1.jpg&#34;&gt;https://img.imgdb.cn/item/606a81ba8322e6675c333ae1.jpg&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;宫崎骏动画类型的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://api.dujin.org/pic/ghibli&#34; alt=&#34;&#34;&gt;
+&lt;a href=&#34;https://img.imgdb.cn/item/606a824e8322e6675c33de44.jpg&#34;&gt;https://img.imgdb.cn/item/606a824e8322e6675c33de44.jpg&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;参考说明&#34;&gt;参考说明&lt;/h2&gt;
+&lt;p&gt;本文参考于以下内容，在此特别感谢！
+&lt;a href=&#34;https://www.dujin.org/16863.html&#34;&gt;缙哥哥博客&lt;/a&gt;
+&lt;a href=&#34;https://www.dujin.org/12142.html&#34;&gt;缙哥哥博客&lt;/a&gt;
+&lt;a href=&#34;http://img.xjh.me/&#34;&gt;如何使用岁月小筑随机背景API&lt;/a&gt;
+&lt;a href=&#34;https://www.kancloud.cn/wei1044/api88/1662649&#34;&gt;同济互联API接口文档&lt;/a&gt;
+&lt;a href=&#34;https://zhuanlan.zhihu.com/p/336053929&#34;&gt;www.qian.blue&lt;/a&gt;&lt;/p&gt;
+</description>
+                
+                
+                
+                
+                
+                    
+                        
+                            
+                                
+                                
+                                
+                                    <category domain="https://my-hugo-blog-latin-xiao-mao.vercel.app/categories/%E9%9A%8F%E7%AC%94/">随笔</category>
+                                
+                            
+                        
+                    
+                        
+                            
+                                
+                                
+                                
+                                    <category domain="https://my-hugo-blog-latin-xiao-mao.vercel.app/tags/%E8%AE%B0%E5%BD%95/">记录</category>
+                                
+                            
+                                
+                                
+                                
+                                    <category domain="https://my-hugo-blog-latin-xiao-mao.vercel.app/tags/%E5%9B%BE%E7%89%87/">图片</category>
+                                
+                            
+                        
+                    
+                
+            </item>
+        
+            <item>
+                <title>Spring AOP学习（二）</title>
+                <link>https://my-hugo-blog-latin-xiao-mao.vercel.app/spring-aop%E5%AD%A6%E4%B9%A0%E4%BA%8C/</link>
+                <guid isPermaLink="true">https://my-hugo-blog-latin-xiao-mao.vercel.app/spring-aop%E5%AD%A6%E4%B9%A0%E4%BA%8C/</guid>
+                <pubDate>Sun, 04 Apr 2021 13:00:19 &#43;0000</pubDate>
+                
+                    <author>reuixiy@gmail.com (古月轩039)</author>
+                
+                <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
+                
+                    <description>&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
+&lt;p&gt;我们通常在实际开发中有这样的需求场景：我需要在不改动原先的业务代码场景下，实现一些额外的功能，比如我计算一下执行某些代码耗时多久啊，我增加一些额外的日志输出啊，等等。。。
+那么我们怎么实现呢？这个时候就可以用到我们的 AOP 了。
+而 AOP 的切面呢，可以是某个类下面的某个方法，也可以是某个包下面的所有方法，还可以是凡是使用到某个注解的地方等，下面呢我们就让 AOP 去切凡是使用了某个注解的地方&lt;/p&gt;
+&lt;h2 id=&#34;定义注解&#34;&gt;定义注解&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;kn&#34;&gt;package&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;com.example.springaopdemo.annotation&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;java.lang.annotation.ElementType&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;java.lang.annotation.Retention&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;java.lang.annotation.RetentionPolicy&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;java.lang.annotation.Target&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;nd&#34;&gt;@Target&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ElementType&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;METHOD&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;nd&#34;&gt;@Retention&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;RetentionPolicy&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;RUNTIME&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;nd&#34;&gt;@interface&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CalculateExecuteTime&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;c1&#34;&gt;// 该注解没有自身属性的定义
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;定义切面aspect&#34;&gt;定义切面Aspect&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;kn&#34;&gt;package&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;com.example.springaopdemo.aspect&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;org.aspectj.lang.ProceedingJoinPoint&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;org.aspectj.lang.annotation.Around&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;org.aspectj.lang.annotation.Aspect&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;org.springframework.stereotype.Component&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;cm&#34;&gt;/**
+&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt; * 切面：通过 @Aspect 来注解 切面
+&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt; */&lt;/span&gt;
+&lt;span class=&#34;nd&#34;&gt;@Aspect&lt;/span&gt;
+&lt;span class=&#34;nd&#34;&gt;@Component&lt;/span&gt;
+&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;CalculateExecuteTimeAspect&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+
+    &lt;span class=&#34;c1&#34;&gt;// 在连接点处要真正执行的代码，即你要实现的额外功能，此处是一个计算耗时的功能
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;c1&#34;&gt;// @Around 环绕上面的自定义注解
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;nd&#34;&gt;@Around&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;@annotation(com.example.springaopdemo.annotation.CalculateExecuteTime)&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Object&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;logExecutionTime&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ProceedingJoinPoint&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;joinPoint&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;throws&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Throwable&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+
+        &lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;start&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;currentTimeMillis&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;Object&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;proceed&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;joinPoint&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;proceed&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;   &lt;span class=&#34;c1&#34;&gt;// 原业务代码继续原来的调用执行
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;executionTime&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;currentTimeMillis&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;start&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;joinPoint&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getSignature&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34; 执行了 &amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;executionTime&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;ms&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;proceed&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+    &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;原先的业务代码层&#34;&gt;原先的业务代码层&lt;/h2&gt;
+&lt;p&gt;这里我们模拟一下原先的业务代码，并在此处使用到上面的自定义注解&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;kn&#34;&gt;package&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;com.example.springaopdemo.test&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;com.example.springaopdemo.annotation.CalculateExecuteTime&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;org.springframework.stereotype.Service&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;java.util.Hashtable&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;java.util.Map&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;nd&#34;&gt;@Service&lt;/span&gt;
+&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;TestService&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+
+    &lt;span class=&#34;nd&#34;&gt;@CalculateExecuteTime&lt;/span&gt;   &lt;span class=&#34;c1&#34;&gt;// 只需要在原先的业务代码上面使用上面的自定义注解即可
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;share&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(){&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;Map&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Object&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;map&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Hashtable&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&amp;gt;();&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;100000&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;++)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;n&#34;&gt;map&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+        &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+    &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;调用&#34;&gt;调用&lt;/h2&gt;
+&lt;p&gt;因为我们这里没有一个完整的dao，service，controller层业务代码，所以只能采用如下方式测试一下效果
+在我们的spring boot 启动类中获取  service bean来调用&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;kn&#34;&gt;package&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;com.example.springaopdemo&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;com.example.springaopdemo.test.TestService&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;org.springframework.boot.SpringApplication&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;org.springframework.boot.autoconfigure.SpringBootApplication&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;org.springframework.context.ApplicationContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;nd&#34;&gt;@SpringBootApplication&lt;/span&gt;
+&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;SpringAopDemoApplication&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+
+    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[]&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;args&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;ApplicationContext&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;applicationContext&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SpringApplication&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;run&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SpringAopDemoApplication&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;args&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;TestService&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;testService&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;applicationContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getBean&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TestService&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;testService&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;share&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+    &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;运行结果&#34;&gt;运行结果&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/606970d48322e6675c50da2f.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;可以看到正如我们预期的那样，输出了原先业务代码的执行耗时时间&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+                
+                
+                
+                
+                
+                    
+                        
+                            
+                                
+                                
+                                
+                                    <category domain="https://my-hugo-blog-latin-xiao-mao.vercel.app/categories/%E7%BC%96%E7%A8%8B/">编程</category>
+                                
+                            
+                        
+                    
+                        
+                            
+                                
+                                
+                                
+                                    <category domain="https://my-hugo-blog-latin-xiao-mao.vercel.app/tags/spring-aop/">Spring AOP</category>
+                                
+                            
+                                
+                                
+                                
+                                    <category domain="https://my-hugo-blog-latin-xiao-mao.vercel.app/tags/java/">Java</category>
+                                
+                            
+                                
+                                
+                                
+                                    <category domain="https://my-hugo-blog-latin-xiao-mao.vercel.app/tags/aop/">AOP</category>
+                                
+                            
+                        
+                    
+                
+            </item>
+        
+            <item>
+                <title>Redis主从哨兵配置</title>
+                <link>https://my-hugo-blog-latin-xiao-mao.vercel.app/redis%E4%B8%BB%E4%BB%8E%E5%93%A8%E5%85%B5%E9%85%8D%E7%BD%AE/</link>
+                <guid isPermaLink="true">https://my-hugo-blog-latin-xiao-mao.vercel.app/redis%E4%B8%BB%E4%BB%8E%E5%93%A8%E5%85%B5%E9%85%8D%E7%BD%AE/</guid>
+                <pubDate>Fri, 02 Apr 2021 00:47:53 &#43;0800</pubDate>
+                
+                    <author>reuixiy@gmail.com (古月轩039)</author>
+                
+                <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
+                
+                    <description>&lt;blockquote&gt;
+&lt;p&gt;这里由于时间紧张，我就暂时先把自己配置的过程做成截图放在这里供大家使用，之后有时间我会来完善这篇文章的，非常抱歉。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/6065f8bc8322e6675c25fa95.jpg&#34; alt=&#34;&#34;&gt;
+&lt;img src=&#34;https://img.imgdb.cn/item/6065f8bc8322e6675c25fa9a.jpg&#34; alt=&#34;&#34;&gt;
+&lt;img src=&#34;https://img.imgdb.cn/item/6065f8bc8322e6675c25fa9d.jpg&#34; alt=&#34;&#34;&gt;
+&lt;img src=&#34;https://img.imgdb.cn/item/6065f8bc8322e6675c25faa3.jpg&#34; alt=&#34;&#34;&gt;
+&lt;img src=&#34;https://img.imgdb.cn/item/6065f8bc8322e6675c25faa9.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/6065f9a38322e6675c26befc.jpg&#34; alt=&#34;&#34;&gt;
+&lt;img src=&#34;https://img.imgdb.cn/item/6065f9a48322e6675c26bf02.jpg&#34; alt=&#34;&#34;&gt;
+&lt;img src=&#34;https://img.imgdb.cn/item/6065f9a48322e6675c26bf0d.jpg&#34; alt=&#34;&#34;&gt;
+&lt;img src=&#34;https://img.imgdb.cn/item/6065f9a48322e6675c26bf12.jpg&#34; alt=&#34;&#34;&gt;
+&lt;img src=&#34;https://img.imgdb.cn/item/6065f9a48322e6675c26bf17.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/6065f9b28322e6675c26cbbe.jpg&#34; alt=&#34;&#34;&gt;
+&lt;img src=&#34;https://img.imgdb.cn/item/6065f9b28322e6675c26cbc2.jpg&#34; alt=&#34;&#34;&gt;
+&lt;img src=&#34;https://img.imgdb.cn/item/6065f9b28322e6675c26cbc5.jpg&#34; alt=&#34;&#34;&gt;
+&lt;img src=&#34;https://img.imgdb.cn/item/6065f9b28322e6675c26cbca.jpg&#34; alt=&#34;&#34;&gt;
+&lt;img src=&#34;https://img.imgdb.cn/item/6065f9b28322e6675c26cbcf.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/6065f9c18322e6675c26d8d8.jpg&#34; alt=&#34;&#34;&gt;
+&lt;img src=&#34;https://img.imgdb.cn/item/6065f9c18322e6675c26d8db.jpg&#34; alt=&#34;&#34;&gt;
+&lt;img src=&#34;https://img.imgdb.cn/item/6065f9c18322e6675c26d8df.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+</description>
+                
+                
+                
+                
+                
+                    
+                        
+                            
+                                
+                                
+                                
+                                    <category domain="https://my-hugo-blog-latin-xiao-mao.vercel.app/categories/%E7%BC%96%E7%A8%8B/">编程</category>
+                                
+                            
+                        
+                    
+                        
+                            
+                                
+                                
+                                
+                                    <category domain="https://my-hugo-blog-latin-xiao-mao.vercel.app/tags/redis/">Redis</category>
+                                
+                            
+                        
+                    
+                
+            </item>
+        
+            <item>
+                <title>Centos7安装Redis教程</title>
+                <link>https://my-hugo-blog-latin-xiao-mao.vercel.app/centos7%E5%AE%89%E8%A3%85redis%E6%95%99%E7%A8%8B/</link>
+                <guid isPermaLink="true">https://my-hugo-blog-latin-xiao-mao.vercel.app/centos7%E5%AE%89%E8%A3%85redis%E6%95%99%E7%A8%8B/</guid>
+                <pubDate>Mon, 29 Mar 2021 23:35:55 &#43;0800</pubDate>
+                
+                    <author>reuixiy@gmail.com (古月轩039)</author>
+                
+                <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
+                
+                    <description>&lt;h2 id=&#34;安装-gcc-依赖&#34;&gt;安装 gcc 依赖&lt;/h2&gt;
+&lt;p&gt;由于 redis 是用C语言开发的，安装之前必须先确认是否有安装gcc环境（通过输入命令：gcc -v 来确认），如果没有安装，执行以下命令进行安装：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;yum install -y gcc
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/6060262c8322e6675cd2e4eb.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;由于我已经安装过了，所以此处显示已安装。（注意：没有目录的强制要求，任何目录下均可）&lt;/p&gt;
+&lt;h2 id=&#34;下载redis包并解压&#34;&gt;下载redis包并解压&lt;/h2&gt;
+&lt;p&gt;首先下载 redis-5.0.3 的包&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;wget http://download.redis.io/releases/redis-5.0.3.tar.gz
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;mark&gt;注意：我们一般都将自己下载的软件放在 /usr/local/ 目录下&lt;/mark&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/606026fe8322e6675cd362c0.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;可以看到我这里已经下载下来了，然后解压：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;tar -zxvf redis-5.0.3.tar.gz
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;进入到-redis-的解压后的目录执行编译&#34;&gt;进入到 redis 的解压后的目录，执行编译&lt;/h2&gt;
+&lt;p&gt;进入 redis 的解压后的目录，执行编译&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; redis-5.0.3
+make
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;安装到指定目录&#34;&gt;安装到指定目录&lt;/h2&gt;
+&lt;p&gt;注意：这里我们将redis安装到指定的目录 /opt/home/redis 下了&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;make install &lt;span class=&#34;nv&#34;&gt;PREFIX&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/opt/home/redis
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;启动redis服务&#34;&gt;启动redis服务&lt;/h2&gt;
+&lt;h3 id=&#34;前台启动方式&#34;&gt;前台启动方式&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; /opt/home/redis/bin
+./redis-server
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;后台启动&#34;&gt;后台启动&lt;/h3&gt;
+&lt;p&gt;从redis的源码目录中复制 redis.conf 到 redis 的安装目录（即从 /usr/local/redis-5.0.3 目录复制到 上面的 /opt/home/redis 中）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;cp /usr/local/redis-5.0.3/redis.conf  /opt/home/redis/bin
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;然后修改 &lt;mark&gt;安装目录&lt;/mark&gt; 下的 redis.conf 配置&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;vi redis.conf
+设置密码：requirepass  &lt;span class=&#34;m&#34;&gt;123456&lt;/span&gt;
+注释掉： &lt;span class=&#34;nb&#34;&gt;bind&lt;/span&gt; 127.0.0.1
+daemonize no 改为daemonize yes
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;最后执行如下命令后台启动&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;./redis-server redis.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;如果要想关闭 redis 服务，使用如下命令即可关闭：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;./redis-cli -p &lt;span class=&#34;m&#34;&gt;6379&lt;/span&gt; shutdown
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;注意上面的 6379 是你想要关闭的redis服务设置的端口（如果你修改过，此处填写你修改过后的端口即可）&lt;/p&gt;
+&lt;h2 id=&#34;设置开机启动&#34;&gt;设置开机启动&lt;/h2&gt;
+&lt;h3 id=&#34;添加开机启动服务&#34;&gt;添加开机启动服务&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;vi /etc/systemd/system/redis.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;复制粘贴如下内容：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;nit&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;Description&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;redis-server
+&lt;span class=&#34;nv&#34;&gt;After&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;network.target
+
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Service&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;Type&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;forking
+&lt;span class=&#34;nv&#34;&gt;ExecStart&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/usr/local/redis-5.0.9/bin/redis-server /usr/local/redis-5.0.9/bin/redis.conf
+&lt;span class=&#34;nv&#34;&gt;PrivateTmp&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;true&lt;/span&gt;
+
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Install&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;WantedBy&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;multi-user.target                       
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;设置开机启动-1&#34;&gt;设置开机启动&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -59,21 +596,40 @@
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;cp -R redis-5.0.3 redis01
-cp -R redis-5.0.3 redis02
-cp -R redis-5.0.3 redis03
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;systemctl daemon-reload
+systemctl start redis.service
+systemctl &lt;span class=&#34;nb&#34;&gt;enable&lt;/span&gt; redis.service
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;如下图所示：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/60602b838322e6675cd5fd98.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;然后，在一台机器上启动三个redis，一个作 master，两个作 slaver，&lt;/p&gt;
-&lt;p&gt;master 端口：6380&lt;/p&gt;
-&lt;p&gt;slaver1 端口：6381&lt;/p&gt;
-&lt;p&gt;slaver2 端口：6382&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&#34;https://img.imgdb.cn/item/6060353f8322e6675cdb36e2.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-</description>
+&lt;/div&gt;&lt;h3 id=&#34;常用的操作命令&#34;&gt;常用的操作命令&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;systemctl start redis.service   &lt;span class=&#34;c1&#34;&gt;#启动redis服务&lt;/span&gt;
+systemctl stop redis.service   &lt;span class=&#34;c1&#34;&gt;#停止redis服务&lt;/span&gt;
+systemctl restart redis.service   &lt;span class=&#34;c1&#34;&gt;#重新启动服务&lt;/span&gt;
+systemctl status redis.service   &lt;span class=&#34;c1&#34;&gt;#查看服务当前状态&lt;/span&gt;
+systemctl &lt;span class=&#34;nb&#34;&gt;enable&lt;/span&gt; redis.service   &lt;span class=&#34;c1&#34;&gt;#设置开机自启动&lt;/span&gt;
+systemctl disable redis.service   &lt;span class=&#34;c1&#34;&gt;#停止开机自启动&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;查看redis是否启动&#34;&gt;查看redis是否启动&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;ps -ef &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; grep redis
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
                 
                 
                 
